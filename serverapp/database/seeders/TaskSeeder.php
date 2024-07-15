@@ -26,7 +26,7 @@ class TaskSeeder extends Seeder
             'description' => $faker->text,
             'start' => $faker->dateTime,
             'end' => $faker->dateTime,
-            'price_per_hour' => $faker->randomFloat(null, 1),
+            'price_per_hour' => $faker->randomFloat(null, 1, 100000),
             'currency' => $faker->randomElement(['usd', 'euro', 'xaf']),
             'reduction' => $faker->randomFloat(null, 0, 100),
             'status' => $faker->randomElement(['PENDING', 'ACCEPTED', 'ONGOING', 'COMPLETED', 'PAID', 'REFUSED', 'PRE-EMPTED']),

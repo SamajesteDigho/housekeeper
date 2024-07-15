@@ -24,11 +24,13 @@ return new class extends Migration
             $table->date('birthdate')->nullable();
             $table->string('id_docs')->nullable();
             $table->enum('role', ['ADMIN', 'AGENT', 'HOUSEKEEPER', 'CLIENT'])->default('CLIENT');
-            $table->enum('status', ['UNCOMPLETED', 'ACTIF', 'SUSPENDED', 'DELETED'])->default('ACTIF');
+            $table->enum('status', ['UNCOMPLETED', 'ACTIF', 'SUSPENDED', 'DELETED', 'VERIFIED'])->default('ACTIF');
             $table->string('avatar')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->fullText(['firstname', 'lastname', 'username', 'email']);
         });
     }
 

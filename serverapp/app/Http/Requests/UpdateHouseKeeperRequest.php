@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAddressRequest extends FormRequest
+class UpdateHouseKeeperRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,15 +22,7 @@ class StoreAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_ref' => 'required | exists:users,ref',
-            'country' => 'required',
-            'province' => 'sometimes',
-            'city' => 'required',
-            'street' => 'sometimes',
-            'full_address' => 'required',
-            'postal_code' => 'sometimes',
-            'fax' => 'sometimes',
-            'fixed_phone' => 'sometimes',
+            //
         ];
     }
 }

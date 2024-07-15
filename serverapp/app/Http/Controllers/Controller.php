@@ -13,6 +13,7 @@ class Controller extends BaseController
 
     const IDFilePath = 'data/id_documents/';
     const SEARCH_LIMIT = 10;
+    const INITIAL_PAGE = 1;
 
     public static function successfulResponse($data, int $status = 200)
     {

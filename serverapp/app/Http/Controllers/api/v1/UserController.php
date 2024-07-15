@@ -19,7 +19,7 @@ class UserController extends Controller
     public function read(Request $request, string $ref)
     {
         $user = User::where(['ref' => $ref])->first();
-        if ($user->status == 'DELETED') {
+        if ($user != null && $user->status == 'DELETED') {
             $result = [
                 'user' => null,
                 'message' => 'This user was deleted.'
@@ -121,13 +121,13 @@ class UserController extends Controller
     {
         $data = $request->all();
         $limit = (int) Arr::get($data, 'limit', Controller::SEARCH_LIMIT);
-        $page = (int) Arr::get($data, 'page', 0);
+        $page = (int) Arr::get($data, 'page', 1);
 
-        $users = User::paginate($limit);
+        $users = User::forPage($page, $limit)->get();
         $result = [
             'users' => $users,
             'count' => $users->count(),
-            'page' => $page + 1,
+            'page' => $page,
             'limit' => $limit,
         ];
         return Controller::successfulResponse($result, 200);

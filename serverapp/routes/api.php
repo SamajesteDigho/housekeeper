@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\v1\AddressController;
 use App\Http\Controllers\api\v1\AuthenticateController;
 use App\Http\Controllers\api\v1\UserController;
 use App\Http\Controllers\Controller;
@@ -44,5 +45,21 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('{ref}/id_doc', [UserController::class, 'load_identificationFile'])->name('user.load_identFile_v1');
 
         Route::get('search/{term}', [UserController::class, 'search'])->name('user.search_v1');
+    });
+
+    Route::group(['prefix' => 'addresses'], function () {
+        Route::get('', [AddressController::class, 'get'])->name('address.get_v1');
+        Route::post('', [AddressController::class, 'create'])->name('address.create_v1');
+        Route::get('{id}', [AddressController::class, 'read'])->name('address.read_v1');
+        Route::post('{id}', [AddressController::class, 'update'])->name('address.update_v1');
+        Route::delete('{id}', [AddressController::class, 'delete'])->name('address.delete_v1');
+    });
+
+    Route::group(['prefix' => 'keepers'], function () {
+        Route::get('', [AddressController::class, 'get'])->name('keepers.get_v1');
+        Route::post('', [AddressController::class, 'create'])->name('keepers.create_v1');
+        Route::get('{id}', [AddressController::class, 'read'])->name('keepers.read_v1');
+        Route::post('{id}', [AddressController::class, 'update'])->name('keepers.update_v1');
+        Route::delete('{id}', [AddressController::class, 'delete'])->name('keepers.delete_v1');
     });
 });

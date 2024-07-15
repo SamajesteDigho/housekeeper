@@ -1,17 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:housekeeper/brain/data/repositories/layout_repository.dart';
 import 'package:housekeeper/brain/routes/names.dart';
+import 'package:housekeeper/pages/base/account_page.dart';
+import 'package:housekeeper/pages/base/home_page.dart';
+import 'package:housekeeper/pages/base/order_page.dart';
+import 'package:housekeeper/pages/base/search_page.dart';
 
-class LoginController extends GetxController {
-  LoginController();
+class LayoutController extends GetxController {
+  final LayoutRepository layoutRepository;
+  LayoutController({required this.layoutRepository});
+  List<Widget> pages = const [
+    HomePage(),
+    SearchPage(),
+    OrderPage(),
+    AccountPage(),
+  ];
 
-  final formKey = GlobalKey<FormState>();
+  int _activePage = 0;
+  int get activePage => _activePage;
 
-  login() {
-    print('Login');
-  }
-
-  register() {
-    Get.toNamed(AppRoutes.register);
+  void changePage(int pageIndex) {
+    if (pageIndex < 0) {
+      _activePage = 0;
+    } else if (pageIndex >= pages.length) {
+      _activePage = pages.length - 1;
+    } else {
+      _activePage = pageIndex;
+    }
+    update();
   }
 }

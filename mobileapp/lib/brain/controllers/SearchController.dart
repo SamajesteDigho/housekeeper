@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/routes/names.dart';
 
-class HomeController extends GetxController {
-  HomeController();
+class MySearchController extends GetxController {
+  MySearchController();
 
   final formKey = GlobalKey<FormState>();
 

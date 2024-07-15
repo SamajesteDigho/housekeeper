@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/routes/names.dart';
 
-class LoginController extends GetxController {
-  LoginController();
+class RegisterController extends GetxController {
+  RegisterController();
 
   final formKey = GlobalKey<FormState>();
 
   login() {
-    print('Login');
+    Get.toNamed(AppRoutes.login);
   }
 
   register() {
-    Get.toNamed(AppRoutes.register);
+    print('Register');
   }
 }

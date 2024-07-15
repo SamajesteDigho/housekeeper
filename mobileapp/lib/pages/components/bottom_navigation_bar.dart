@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:msma/heart/constants/colors.dart';
-import 'package:msma/heart/constants/dimensions.dart';
-import 'package:msma/heart/controllers/layout_controller.dart';
+import 'package:housekeeper/brain/constants/dimensions.dart';
+import 'package:housekeeper/brain/controllers/LayoutController.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   const MyBottomNavigationBar({super.key});
@@ -19,7 +18,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       child: GetBuilder<LayoutController>(
         builder: (controller) => BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
-          selectedItemColor: AppColors.primaryColor,
+          selectedItemColor: Colors.blue,// AppColors.primaryColor,
           unselectedItemColor: Colors.black,
           showUnselectedLabels: true,
           currentIndex: controller.activePage,
@@ -30,25 +29,20 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               label: "Home",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.featured_play_list_outlined),
-              activeIcon: Icon(Icons.featured_play_list),
-              label: "Roaster",
+              icon: Icon(Icons.search),
+              activeIcon: Icon(Icons.search),
+              label: "Search",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat_outlined),
-              activeIcon: Icon(Icons.chat),
-              label: "Chats",
+              icon: Icon(Icons.list_alt_outlined),
+              activeIcon: Icon(Icons.list_alt_sharp),
+              label: "Orders",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.local_activity_outlined),
-              activeIcon: Icon(Icons.local_activity),
-              label: "Activity",
+              icon: Icon(Icons.person_outline),
+              activeIcon: Icon(Icons.person),
+              label: "Account",
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings_outlined, grade: 1),
-              activeIcon: Icon(Icons.settings),
-              label: "Settings",
-            )
           ],
           onTap: (index) => controller.changePage(index),
         ),

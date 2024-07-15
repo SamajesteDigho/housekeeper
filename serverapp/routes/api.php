@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\v1\AddressController;
 use App\Http\Controllers\api\v1\AuthenticateController;
+use App\Http\Controllers\api\v1\HouseKeeperController;
 use App\Http\Controllers\api\v1\UserController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -56,10 +57,10 @@ Route::group(['prefix' => 'v1'], function () {
     });
 
     Route::group(['prefix' => 'keepers'], function () {
-        Route::get('', [AddressController::class, 'get'])->name('keepers.get_v1');
-        Route::post('', [AddressController::class, 'create'])->name('keepers.create_v1');
-        Route::get('{id}', [AddressController::class, 'read'])->name('keepers.read_v1');
-        Route::post('{id}', [AddressController::class, 'update'])->name('keepers.update_v1');
-        Route::delete('{id}', [AddressController::class, 'delete'])->name('keepers.delete_v1');
+        Route::get('', [HouseKeeperController::class, 'get'])->name('keepers.get_v1');
+        Route::post('', [HouseKeeperController::class, 'create'])->name('keepers.create_v1');
+        Route::get('{id}', [HouseKeeperController::class, 'read'])->name('keepers.read_v1');
+        Route::post('{id}', [HouseKeeperController::class, 'update'])->name('keepers.update_v1');
+        Route::delete('{id}', [HouseKeeperController::class, 'delete'])->name('keepers.delete_v1');
     });
 });

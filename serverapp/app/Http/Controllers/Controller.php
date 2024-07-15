@@ -47,11 +47,11 @@ class Controller extends BaseController
         return 'U' . Str::uuid();
     }
 
-    public static function housekeeperRefGen($length = 10)
+    public static function housekeeperRefGen($length = 7)
     {
         $pool = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code = substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
-        return "HK$code";
+        return "HK" . $code;
     }
 
     public static function taskRefGen()

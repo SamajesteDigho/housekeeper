@@ -11,7 +11,7 @@ class StoreHouseKeeperRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreHouseKeeperRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_ref' => 'required | exists:users,ref',
+            'religion' => 'sometimes',
+            'nationality' => 'required',
+            'province' => 'required',
         ];
     }
 }

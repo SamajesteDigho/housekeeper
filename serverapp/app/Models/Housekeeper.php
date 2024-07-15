@@ -21,9 +21,10 @@ class Housekeeper extends Model
         'user_id',
         'rating',
         'images',
-        'nationalty',
-        'region',
+        'nationality',
+        'province',
         'religion',
+        'matricule'
     ];
 
     /**

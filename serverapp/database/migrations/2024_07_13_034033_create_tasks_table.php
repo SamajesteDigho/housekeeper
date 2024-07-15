@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('currency', ['usd', 'euro', 'xaf'])->default('usd');
             $table->float('reduction')->default(0);
             $table->enum('status', ['PENDING', 'ACCEPTED', 'ONGOING', 'COMPLETED', 'PAID', 'REFUSED', 'PRE-EMPTED'])->default('PENDING');
+            $table->integer('total_days')->default(0);
             $table->float('rating')->default(0);
             $table->text('appreciation')->nullable();
             $table->boolean('paid')->default(false);

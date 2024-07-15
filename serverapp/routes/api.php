@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\AddressController;
 use App\Http\Controllers\api\v1\AuthenticateController;
 use App\Http\Controllers\api\v1\HouseKeeperController;
+use App\Http\Controllers\api\v1\TaskController;
 use App\Http\Controllers\api\v1\UserController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -62,5 +63,13 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('{id}', [HouseKeeperController::class, 'read'])->name('keepers.read_v1');
         Route::post('{id}', [HouseKeeperController::class, 'update'])->name('keepers.update_v1');
         Route::delete('{id}', [HouseKeeperController::class, 'delete'])->name('keepers.delete_v1');
+    });
+
+    Route::group(['prefix' => 'tasks'], function () {
+        Route::get('', [TaskController::class, 'get'])->name('tasks.get_v1');
+        Route::post('', [TaskController::class, 'create'])->name('tasks.create_v1');
+        Route::get('{id}', [TaskController::class, 'read'])->name('tasks.read_v1');
+        Route::post('{id}', [TaskController::class, 'update'])->name('tasks.update_v1');
+        Route::delete('{id}', [TaskController::class, 'delete'])->name('tasks.delete_v1');
     });
 });

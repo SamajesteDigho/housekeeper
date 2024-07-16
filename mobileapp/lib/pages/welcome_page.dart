@@ -62,7 +62,9 @@ class _WelcomePage extends State<WelcomePage> {
                               ],
                             ),
                           ),
-                          ClickableText(text: 'Login', onclick: controller.clickLogin)
+                          controller.isLoggedIn
+                              ? ClickableText(text: 'Home', onclick: controller.clickHome)
+                              : ClickableText(text: 'Login', onclick: controller.clickLogin),
                         ],
                       ),
                     ),
@@ -105,39 +107,28 @@ class _WelcomePage extends State<WelcomePage> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: const <Widget>[
-                          Testimony(
-                              text: 'This is really interesting and usefull app. Thanks...',
-                              name: 'Armanda Carmila',
-                              ratings: 5),
-                          Testimony(
-                              text: 'This is really interesting and usefull app. Thanks...',
-                              name: 'Armanda Carmila',
-                              ratings: 5),
-                          Testimony(
-                              text: 'This is really interesting and usefull app. Thanks...',
-                              name: 'Armanda Carmila',
-                              ratings: 5),
-                          Testimony(
-                            text: 'This is really interesting and usefull app. Thanks...',
-                            name: 'Armanda Carmila',
-                            ratings: 5,
-                          ),
+                          // Testimony(
+                          //     text: 'This is really interesting and usefull app. Thanks...',
+                          //     name: 'Armanda Carmila',
+                          //     ratings: 5),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Don't yet have an account : ",
-                            style: TextStyle(fontSize: AppDimension.mediumText, fontWeight: FontWeight.normal),
-                          ),
-                          ClickableText(text: 'Register', onclick: controller.clickRegister)
-                        ],
-                      ),
-                    )
+                    controller.isLoggedIn
+                        ? const SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Don't yet have an account : ",
+                                  style: TextStyle(fontSize: AppDimension.mediumText, fontWeight: FontWeight.normal),
+                                ),
+                                ClickableText(text: 'Register', onclick: controller.clickRegister),
+                              ],
+                            ),
+                          )
                   ],
                 ),
               ),

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/io.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as GETX;
 import 'package:cookie_jar/cookie_jar.dart';
@@ -44,10 +43,8 @@ class HttpUtil {
         return handler.next(response);
       }, onError: (DioException e, handler) {
         // EasyLoading.dismiss();
-        if (kDebugMode) {
-          print('[ERROR] : ${e.message}');
-        }
-        // ErrorEntity eInfo = createErrorEntity(e);
+        ErrorEntity eInfo = createErrorEntity(e);
+        print('[ERROR Display(${eInfo.code})] : ${eInfo.message}');
         // MySnackBar.failureSnackBar(
         //   title: '',
         //   message: eInfo.message,
@@ -64,12 +61,8 @@ class HttpUtil {
       case DioExceptionType.connectionTimeout:
         return ErrorEntity(code: -1, message: 'network_time_out'.tr);
       case DioExceptionType.sendTimeout:
-
-        /// Send timeout
         return ErrorEntity(code: -1, message: 'network_time_out'.tr);
       case DioExceptionType.receiveTimeout:
-
-        /// Receive Time out
         return ErrorEntity(code: -1, message: 'network_time_out'.tr);
       case DioExceptionType.values:
         {
@@ -143,15 +136,11 @@ class HttpUtil {
       bool list = false,
       String cacheKey = '',
       bool cacheDisk = false}) async {
+    print("Requesting [GET] ${AppStrings.baseServerURL}$path");
     Options requestOptions = options ?? Options();
     requestOptions.extra ??= {};
-    requestOptions.extra!.addAll({
-      "refresh": refresh,
-      "noCache": noCache,
-      "list": list,
-      "cacheKey": cacheKey,
-      "cacheDisk": cacheDisk,
-    });
+    requestOptions.extra!
+        .addAll({"refresh": refresh, "noCache": noCache, "list": list, "cacheKey": cacheKey, "cacheDisk": cacheDisk});
     requestOptions.headers = requestOptions.headers ?? {};
     var response = await dio.get(
       path,
@@ -162,24 +151,20 @@ class HttpUtil {
     return response.data;
   }
 
-//   Future post(
-//     String path, {
-//     dynamic data,
-//     Map<String, dynamic>? queryParameters,
-//     Options? options,
-//   }) async {
-//     Options requestOptions = options ?? Options();
-//     requestOptions.headers = requestOptions.headers ?? {};
-//     var response = await dio.post(
-//       path,
-//       data: data,
-//       queryParameters: queryParameters,
-//       options: requestOptions,
-//       cancelToken: cancelToken,
-//     );
-//     return response.data;
-//   }
-//
+  Future<dynamic> post(String path, {dynamic data, Map<String, dynamic>? queryParameters, Options? options}) async {
+    print("Requesting [POST] ${AppStrings.baseServerURL}$path");
+    Options requestOptions = options ?? Options();
+    requestOptions.headers = requestOptions.headers ?? {};
+    var response = await dio.post(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: requestOptions,
+      cancelToken: cancelToken,
+    );
+    return response.data;
+  }
+
 //   Future put(
 //     String path, {
 //     dynamic data,

@@ -10,6 +10,7 @@ class AnimatedText extends StatefulWidget {
     this.textSize = 30,
     this.bold = false,
     this.repeat = true,
+    this.style,
   });
   final String text;
   final AnimationType animationType;
@@ -17,6 +18,7 @@ class AnimatedText extends StatefulWidget {
   final double textSize;
   final bool bold;
   final bool repeat;
+  final TextStyle? style;
 
   @override
   State<AnimatedText> createState() => _AnimatedText();
@@ -25,75 +27,61 @@ class AnimatedText extends StatefulWidget {
 class _AnimatedText extends State<AnimatedText> {
   @override
   Widget build(BuildContext context) {
+    TextStyle animationTextStyle = widget.style ??
+        TextStyle(
+          color: widget.textColor,
+          fontSize: widget.textSize,
+          fontWeight: widget.bold ? FontWeight.bold : FontWeight.normal,
+        );
     return AnimatedTextKit(
       animatedTexts: widget.animationType == AnimationType.typerAnimation
-          ? [typerAnimation(widget.text)]
+          ? [typerAnimation(widget.text, animationTextStyle)]
           : widget.animationType == AnimationType.scaleAnimation
-              ? [scaleAnimation(widget.text)]
+              ? [scaleAnimation(widget.text, animationTextStyle)]
               : widget.animationType == AnimationType.fadeAnimation
-                  ? [fadeAnimation(widget.text)]
+                  ? [fadeAnimation(widget.text, animationTextStyle)]
                   : widget.animationType == AnimationType.rotateAnimation
-                      ? [rotateAnimation(widget.text)]
-                      : [waveAnimation(widget.text)],
+                      ? [rotateAnimation(widget.text, animationTextStyle)]
+                      : [waveAnimation(widget.text, animationTextStyle)],
       repeatForever: widget.repeat,
       stopPauseOnTap: false,
     );
   }
 
-  waveAnimation(String text) {
+  waveAnimation(String text, TextStyle style) {
     return WavyAnimatedText(
       widget.text,
-      textStyle: TextStyle(
-        color: widget.textColor,
-        fontSize: widget.textSize,
-        fontWeight: widget.bold ? FontWeight.bold : FontWeight.normal,
-      ),
+      textStyle: style,
     );
   }
 
-  scaleAnimation(String text) {
+  scaleAnimation(String text, TextStyle style) {
     return ScaleAnimatedText(
       widget.text,
-      textStyle: TextStyle(
-        color: widget.textColor,
-        fontSize: widget.textSize,
-        fontWeight: widget.bold ? FontWeight.bold : FontWeight.normal,
-      ),
+      textStyle: style,
       duration: const Duration(seconds: 4),
     );
   }
 
-  typerAnimation(String text) {
+  typerAnimation(String text, TextStyle style) {
     return TyperAnimatedText(
       widget.text,
-      textStyle: TextStyle(
-        color: widget.textColor,
-        fontSize: widget.textSize,
-        fontWeight: widget.bold ? FontWeight.bold : FontWeight.normal,
-      ),
+      textStyle: style,
       speed: const Duration(milliseconds: 100),
     );
   }
 
-  fadeAnimation(String text) {
+  fadeAnimation(String text, TextStyle style) {
     return FadeAnimatedText(
       widget.text,
-      textStyle: TextStyle(
-        color: widget.textColor,
-        fontSize: widget.textSize,
-        fontWeight: widget.bold ? FontWeight.bold : FontWeight.normal,
-      ),
+      textStyle: style,
     );
   }
 
-  rotateAnimation(String text) {
+  rotateAnimation(String text, TextStyle style) {
     return RotateAnimatedText(
       widget.text,
-      textStyle: TextStyle(
-        color: widget.textColor,
-        fontSize: widget.textSize,
-        fontWeight: widget.bold ? FontWeight.bold : FontWeight.normal,
-      ),
+      textStyle: style,
     );
   }
 }

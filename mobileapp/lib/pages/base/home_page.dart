@@ -25,7 +25,6 @@ class HomePage extends StatelessWidget {
               child: Column(
                 children: [
                   const AdvertisementBlock(),
-
                   Container(
                     width: AppDimension.appWidth,
                     padding: const EdgeInsets.symmetric(horizontal: AppDimension.defaultPadding),
@@ -38,39 +37,20 @@ class HomePage extends StatelessWidget {
                           'Top Workers',
                           style: TextStyle(fontSize: AppDimension.largeText, fontWeight: FontWeight.bold),
                         ),
-                        Container(
-                          height: 200,
-                          decoration: const BoxDecoration(color: Colors.transparent),
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: const <Widget>[
-                              Testimony(
-                                text: 'This is really interesting and usefull app. Thanks...',
-                                name: 'Armanda Carmila',
-                                ratings: 5,
+                        Obx(() => Container(
+                              height: 200,
+                              decoration: const BoxDecoration(color: Colors.transparent),
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: <Widget>[
+                                  for (int i = 0; i < controller.top_keepers.length; i++)
+                                    Testimony(houseKeeper: controller.top_keepers[i]),
+                                ],
                               ),
-                              Testimony(
-                                text: 'This is really interesting and usefull app. Thanks...',
-                                name: 'Armanda Carmila',
-                                ratings: 5,
-                              ),
-                              Testimony(
-                                text: 'This is really interesting and usefull app. Thanks...',
-                                name: 'Armanda Carmila',
-                                ratings: 5,
-                              ),
-                              Testimony(
-                                text: 'This is really interesting and usefull app. Thanks...',
-                                name: 'Armanda Carmila',
-                                ratings: 5,
-                              ),
-                            ],
-                          ),
-                        ),
+                            )),
                       ],
                     ),
                   ),
-
                   Container(
                     width: AppDimension.appWidth,
                     padding: const EdgeInsets.symmetric(horizontal: AppDimension.defaultPadding),
@@ -83,35 +63,17 @@ class HomePage extends StatelessWidget {
                           'Near By Workers',
                           style: TextStyle(fontSize: AppDimension.largeText, fontWeight: FontWeight.bold),
                         ),
-                        Container(
-                          height: 200,
-                          decoration: const BoxDecoration(color: Colors.transparent),
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: const <Widget>[
-                              Testimony(
-                                text: 'This is really interesting and usefull app. Thanks...',
-                                name: 'Armanda Carmila',
-                                ratings: 5,
+                        Obx(() => Container(
+                              height: 200,
+                              decoration: const BoxDecoration(color: Colors.transparent),
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: <Widget>[
+                                  for (int i = 0; i < controller.near_keepers.length; i++)
+                                    Testimony(houseKeeper: controller.near_keepers[i]),
+                                ],
                               ),
-                              Testimony(
-                                text: 'This is really interesting and usefull app. Thanks...',
-                                name: 'Armanda Carmila',
-                                ratings: 5,
-                              ),
-                              Testimony(
-                                text: 'This is really interesting and usefull app. Thanks...',
-                                name: 'Armanda Carmila',
-                                ratings: 5,
-                              ),
-                              Testimony(
-                                text: 'This is really interesting and usefull app. Thanks...',
-                                name: 'Armanda Carmila',
-                                ratings: 5,
-                              ),
-                            ],
-                          ),
-                        ),
+                            )),
                       ],
                     ),
                   ),

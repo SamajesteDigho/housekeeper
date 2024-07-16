@@ -26,9 +26,7 @@ class MyApp extends StatelessWidget {
           title: 'HOUSEKEEPER',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.blueAccent,
-            ),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
             useMaterial3: true,
           ),
           initialRoute: AppRoutes.initial,

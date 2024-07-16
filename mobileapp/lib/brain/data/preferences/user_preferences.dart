@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
@@ -8,12 +10,14 @@ class UserPreference extends GetxController {
   static UserPreference get to => Get.find();
 
   final _isLogin = false.obs;
-  final _profile = User().obs;
+  final _profile = UserModel().obs;
   final _deviceToken = ''.obs;
+  final _authToken = ''.obs;
 
-  User get profile => _profile.value;
-  bool get login => _isLogin.value;
+  UserModel get profile => _profile.value;
+  bool get isLoggedIn => _isLogin.value;
   String get deviceToken => _deviceToken.value;
+  String get authToken => _authToken.value;
 
   @override
   void onInit() {
@@ -21,14 +25,15 @@ class UserPreference extends GetxController {
     var element = StorageService.to.getString(key: AppStrings.PREF_USER_PROFILE_KEY);
     if (element.isNotEmpty) {
       _isLogin.value = true;
-      // _profile(User.fromJson(jsonDecode(element)));
+      _profile(UserModel.fromJSON(jsonDecode(element)));
     }
     _deviceToken.value = StorageService.to.getString(key: AppStrings.PREF_USER_DEVICETOKEN_KEY) ?? '';
+    _authToken.value = StorageService.to.getString(key: AppStrings.PREF_USER_AUTHTOKEN_KEY) ?? '';
   }
 
   /// Saving user profile to local storage
-  Future<void> saveProfile({required User profile}) async {
-    // await StorageService.to.setString(key: AppStrings.PREF_USER_PROFILE_KEY, value: jsonEncode(profile));
+  Future<void> saveProfile({required UserModel profile}) async {
+    await StorageService.to.setString(key: AppStrings.PREF_USER_PROFILE_KEY, value: jsonEncode(profile.toJSON()));
     _isLogin.value = true;
     _profile.value = profile;
   }
@@ -39,21 +44,28 @@ class UserPreference extends GetxController {
     _deviceToken.value = token;
   }
 
+  Future<void> saveAuthToken({required String token}) async {
+    await StorageService.to.setString(key: AppStrings.PREF_USER_AUTHTOKEN_KEY, value: token);
+    _authToken.value = token;
+  }
+
   /// Getting user profile from local storage
   void getProfile() {
     var element = StorageService.to.getString(key: AppStrings.PREF_USER_PROFILE_KEY);
     if (element.isNotEmpty) {
       _isLogin.value = true;
-      // _profile.value = User.fromJson(jsonDecode(element));
+      _profile.value = UserModel.fromJSON(jsonDecode(element));
     }
+    _authToken.value = StorageService.to.getString(key: AppStrings.PREF_USER_AUTHTOKEN_KEY) ?? '';
   }
 
   /// On User Logout, Clear the User Profile
   Future<void> logoutProfile() async {
     await StorageService.to.remove(key: AppStrings.PREF_USER_PROFILE_KEY);
     await StorageService.to.remove(key: AppStrings.PREF_USER_DEVICETOKEN_KEY);
-    _profile.value = User();
+    _profile.value = UserModel();
     _deviceToken.value = '';
+    _authToken.value = '';
     _isLogin.value = false;
     Get.offAllNamed(AppRoutes.login);
   }

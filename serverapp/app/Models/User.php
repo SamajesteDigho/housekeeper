@@ -65,4 +65,9 @@ class User extends Authenticatable
         $code = 'U' . last($parts);
         return $code;
     }
+
+    public static function parse_user(User $user) {
+        $user->avatar = $user->avatar ?? 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . ($user->avatar ?? '/data/avatar/default_male.jpg');
+        return $user;
+    }
 }

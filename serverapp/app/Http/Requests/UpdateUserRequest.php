@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'firstname' => 'sometimes | min:3',
             'lastname' => 'sometimes | min:2',
-            'username' => 'sometimes | min:5 | unique:users,username',
+            'username' => 'sometimes | min:5',
             'phone' => 'sometimes',
             'birthdate' => 'sometimes | date_format:Y/m/d',
             'avatar' => 'sometimes',
@@ -37,7 +37,6 @@ class UpdateUserRequest extends FormRequest
             'firstname.min' => 'The firstname field should have atleat 3 characters.',
             'lastname.min' => 'The lastname field should have atleat 2 characters.',
             'username.min' => 'The username field should have atleat 5 characters.',
-            'username.unique' => 'The username is already in use. Choose another one.',
             'birthdate.date_format' => 'Birthdate must respect the format Y/m/d'
         ];
     }

@@ -27,4 +27,18 @@ class Task extends Model
         'paid',
         'payment_ref'
     ];
+
+    /*====================================================================
+        SPECIALIZED ENDPOINTS
+    ====================================================================*/
+    public static function parse_task(Task $task) {
+        $client = User::find($task->client_id);
+        $keeper = User::find($task->keeper_id);
+
+        $task->client = User::parse_user($client);
+        $task->keeper = User::parse_user($keeper);
+        $task->paid = boolval($task->paid);
+
+        return $task;
+    }
 }

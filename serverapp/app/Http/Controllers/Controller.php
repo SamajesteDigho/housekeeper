@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class Controller extends BaseController
@@ -30,7 +31,7 @@ class Controller extends BaseController
             'message' => $message,
             'status_code' => $status,
             'success' => false
-        ], $status);
+        ], 200);
     }
 
     public static function storeFile($file, $name, $folder) {
@@ -57,5 +58,20 @@ class Controller extends BaseController
     public static function taskRefGen()
     {
         return 'T' . Str::uuid();
+    }
+
+    public static function validateFilters(string $table, string $filters = null): string|null {
+        if ($filters == null) {
+            return null;
+        }
+        $keys = explode(',', $filters);
+        $validated = [];
+        foreach ($keys as $key) {
+            if (Schema::hasColumn($table, $key)) {
+                $validated[] = $key;
+            }
+        }
+        $result = implode(',', $validated);
+        return $result;
     }
 }

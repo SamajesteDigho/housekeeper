@@ -52,7 +52,7 @@ class UserController extends Controller
         $user->update($query);
 
         $result = [
-            'user' => $user
+            'result' => $user
         ];
         return Controller::successfulResponse($result, 200);
     }
@@ -71,6 +71,7 @@ class UserController extends Controller
         $user->save();
 
         $result = [
+            'result' => 'OK',
             'message' => 'Successful load ID Doc',
             'doc_path' => $user->path,
         ];
@@ -84,7 +85,7 @@ class UserController extends Controller
         $user->save();
 
         $result = [
-            'delete' => $user->id,
+            'result' => $user->id,
             'message' => 'Deleted successfully'
         ];
         return Controller::successfulResponse($result, 200);
@@ -93,22 +94,24 @@ class UserController extends Controller
     public function search(Request $request, string $term)
     {
         $data = $request->all();
-        $keys = explode(',', Arr::get($data, 'keys'));
+        $keys = Arr::get($data, 'keys');
         $limit = (int) Arr::get($data, 'limit', Controller::SEARCH_LIMIT);
         $page = (int) Arr::get($data, 'page', 0);
 
-        $validated = [];
-        foreach ($keys as $key) {
-            if (Schema::hasColumn('users', $key)) {
-                $validated[] = $key;
+        if ($term == null) {
+            $users = User::inRandomOrder()->take($limit)->get();
+        } else {
+            $filters = Controller::validateFilters('users', $keys);
+            if ($filters == null) {
+                $query = 'MATCH (firstname,lastname,email) AGAINST (? IN BOOLEAN MODE)';
+            } else {
+                $query = 'MATCH (' . $filters . ') AGAINST (? IN BOOLEAN MODE)';
             }
+            $users = User::whereRaw($query, ['*' . $term . '*'])->limit($limit)->get();
         }
 
-        $query = 'MATCH (' . implode(',', $validated) . ') AGAINST (? IN BOOLEAN MODE)';
-
-        $users = User::whereRaw($query, ['*' . $term . '*'])->limit($limit)->get();
         $result = [
-            'users' => $users,
+            'result' => $users,
             'count' => $users->count(),
             'search_term' => $term,
             'limit' => $limit,
@@ -125,7 +128,7 @@ class UserController extends Controller
 
         $users = User::forPage($page, $limit)->get();
         $result = [
-            'users' => $users,
+            'result' => $users,
             'count' => $users->count(),
             'page' => $page,
             'limit' => $limit,

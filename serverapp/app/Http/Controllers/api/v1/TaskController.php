@@ -13,11 +13,12 @@ use Illuminate\Support\Arr;
 
 class TaskController extends Controller
 {
-    public function get(Request $request) {
+    public function get(Request $request)
+    {
         $data = $request->all();
         $page = (int) Arr::get($data, 'page', Controller::INITIAL_PAGE);
         $limit = (int) Arr::get($data, 'limit', Controller::SEARCH_LIMIT);
-    
+
         $tasks = Task::forPage($page, $limit)->get();
 
         $result = [
@@ -28,7 +29,8 @@ class TaskController extends Controller
         ];
         return Controller::successfulResponse($result, 200);
     }
-    public function create(StoreTaskRequest $request) {
+    public function create(StoreTaskRequest $request)
+    {
         $data = $request->validated();
         if (Arr::get($data, 'client_ref') == Arr::get($data, 'keeper_ref')) {
             return Controller::failedResponse('Client cannot be Keeper on a given task.');
@@ -61,14 +63,16 @@ class TaskController extends Controller
         ];
         return Controller::successfulResponse($result, 201);
     }
-    public function read(Request $request, $id) {
+    public function read(Request $request, $id)
+    {
         $task = Task::find($id);
         $result = [
             'result' => $task
         ];
         return Controller::successfulResponse($result);
     }
-    public function update(UpdateTaskRequest $request, $id) {
+    public function update(UpdateTaskRequest $request, $id)
+    {
         $task = Task::find($id);
         if ($task == null) {
             return Controller::failedResponse('Could not find the task.');
@@ -95,7 +99,8 @@ class TaskController extends Controller
         ];
         return Controller::successfulResponse($result);
     }
-    public function delete(Request $request, $id) {
+    public function delete(Request $request, $id)
+    {
         $task = Task::find($id);
         if ($task == null) {
             return Controller::failedResponse('The task could not be found');
@@ -104,6 +109,26 @@ class TaskController extends Controller
         $result = [
             'result' => $id,
             'message' => 'Task deleted successfully.'
+        ];
+        return Controller::successfulResponse($result);
+    }
+
+    public function user_tasks(Request $request, string $user_ref)
+    {
+        $user = User::where(['ref' => $user_ref])->first();
+        $tasks = [];
+        if ($user == null) {
+            $tasks = [];
+        } else {
+            $collected = Task::where(['keeper_id' => $user->id])->orWhere(['client_id' => $user->id])->get();
+            foreach ($collected as $task) {
+                $tasks[] = Task::parse_task($task);
+            }
+        }
+
+        $result = [
+            'result' => $tasks,
+            'count' => count($tasks)
         ];
         return Controller::successfulResponse($result);
     }

@@ -31,8 +31,8 @@
     <header class="navbar navbar-sticky navbar-expand-lg navbar-dark">
       <div class="container position-relative">
         <a class="navbar-brand" href="#">
-          <img class="navbar-brand-regular" style="width: 100px; height: 100px;" src="{{ asset('assets/images/logo.png') }}" alt="brand-logo">
-          <img class="navbar-brand-sticky" style="width: 100px; height: 100px;" src="{{ asset('assets/images/logo.png') }}" alt="sticky brand-logo">
+          <img class="navbar-brand-regular" style="width: 100px; height: 100px;" src="{{ asset('assets/images/landing/housekeeper-logo-circle.png') }}" alt="brand-logo">
+          <img class="navbar-brand-sticky" style="width: 100px; height: 100px;" src="{{ asset('assets/images/landing/housekeeper-logo-circle.png') }}" alt="sticky brand-logo">
         </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="navbarToggler" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -160,12 +160,12 @@
                 Have access to the most experienced house keeping service with our most experienced workers, selected amongst
                 the most experienced in the domain. Set a task, select a worker and let us manage it for you.
               </p>
-              <a href="{{ route('auth.login') }}" class="btn">Get Started</a>
+              <a href="http://playstore.google.com/" class="btn">Get Started</a>
             </div>
           </div>
           <div class="col-12 col-md-5">
             <div class="welcome-thumb" data-aos="fade-right" data-aos-delay="500" data-aos-duration="1000">
-              <img src="{{ asset('assets/images/landing/first-page.jpg')}}" alt="">
+              <img src="{{ asset('assets/images/landing/housekeeper-2.jpg')}}" alt="">
             </div>
           </div>
         </div>
@@ -379,7 +379,6 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12 col-md-10 col-lg-8">
-            <!-- Work Content -->
             <div class="work-content text-center">
               <h2 class="text-white">How it works?</h2>
               <p class="d-none d-sm-block text-white my-3 mt-sm-4 mb-sm-5">
@@ -395,7 +394,7 @@
           <div class="col-12 col-md-4">
             <div class="single-work text-center p-3">
               <div class="work-icon">
-                <img class="avatar-md" src="assets/img/icon/work/download.png" alt="">
+                <img class="avatar-md" src="{{ asset('assets/images/landing/google.png') }}" alt="">
               </div>
               <h3 class="text-white py-3">Install the App</h3>
               <p class="text-white">
@@ -409,7 +408,7 @@
           <div class="col-12 col-md-4">
             <div class="single-work text-center p-3">
               <div class="work-icon">
-                <img class="avatar-md" src="assets/img/icon/work/settings.png" alt="">
+                <img class="avatar-md" src="{{ asset('assets/images/landing/setting.png')}}" alt="">
               </div>
               <h3 class="text-white py-3">Setup your profile</h3>
               <p class="text-white">
@@ -421,7 +420,7 @@
           <div class="col-12 col-md-4">
             <div class="single-work text-center p-3">
               <div class="work-icon">
-                <img class="avatar-md" src="assets/img/icon/work/app.png" alt="">
+                <img class="avatar-md" src="{{ asset('assets/images/landing/housekeeper-2.jpg') }}" alt="">
               </div>
               <h3 class="text-white py-3">Enjoy the features!</h3>
               <p class="text-white">
@@ -459,23 +458,23 @@
             <div class="app-screenshots">
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="assets/img/screenshots/1.jpg" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-1.jpg') }}" alt="">
               </div>
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="assets/img/screenshots/2.jpg" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-2.jpg') }}" alt="">
               </div>
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="assets/img/screenshots/3.jpg" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-3.jpg') }}" alt="">
               </div>
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="assets/img/screenshots/4.jpg" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-4.jpg') }}" alt="">
               </div>
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="assets/img/screenshots/5.jpg" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-2.jpg') }}" alt="">
               </div>
             </div>
           </div>

@@ -458,23 +458,23 @@
             <div class="app-screenshots">
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="{{ asset('assets/images/landing/housekeeper-1.jpg') }}" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-welcome.png') }}" alt="">
               </div>
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="{{ asset('assets/images/landing/housekeeper-2.jpg') }}" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-home.png') }}" alt="">
               </div>
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="{{ asset('assets/images/landing/housekeeper-3.jpg') }}" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-search.png') }}" alt="">
               </div>
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="{{ asset('assets/images/landing/housekeeper-4.jpg') }}" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-tasks.png') }}" alt="">
               </div>
               <!-- Single Screenshot Item -->
               <div class="single-screenshot">
-                <img src="{{ asset('assets/images/landing/housekeeper-2.jpg') }}" alt="">
+                <img src="{{ asset('assets/images/landing/housekeeper-profile.png') }}" alt="">
               </div>
             </div>
           </div>

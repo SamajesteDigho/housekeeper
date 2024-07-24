@@ -30,6 +30,7 @@ class AuthenticateController extends Controller
             } else {
                 return Controller::failedResponse('Invalid credentials !', 403);
             }
+            
             // Collect keeper info
             $keeper = Housekeeper::where(['user_id' => $user->id])->first();
             $user->keeper = $keeper;

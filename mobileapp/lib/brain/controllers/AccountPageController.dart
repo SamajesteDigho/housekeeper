@@ -1,25 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:housekeeper/brain/api/HouseKeeperAPI.dart';
-import 'package:housekeeper/brain/data/models/keepers.dart';
+import 'package:housekeeper/brain/api/UserAPI.dart';
+import 'package:housekeeper/brain/data/models/user.dart';
+import 'package:housekeeper/brain/data/preferences/user_preferences.dart';
 import 'package:housekeeper/brain/routes/names.dart';
 
-class HomeController extends GetxController {
-  HomeController();
+class AccountPageController extends GetxController {
+  AccountPageController();
 
   final formKey = GlobalKey<FormState>();
 
-  RxList<KeeperModel> top_keepers = <KeeperModel>[].obs;
-  RxList<KeeperModel> near_keepers = <KeeperModel>[].obs;
+  UserModel user = UserPreference.to.profile;
 
-  @override
-  void onInit() {
-    super.onInit();
-    initialAPICalls();
+  clickEditUser() {
+    print('Editing');
   }
 
-  void initialAPICalls() {
-    HouseKeeperAPI.topKeepers().then((value) => top_keepers.value = value);
-    HouseKeeperAPI.nearKeepers().then((value) => near_keepers.value = value);
+  becomeHouseKeeper() {
+    Get.toNamed(AppRoutes.requestWorker);
+  }
+
+  houseKeeperDetails() {
+    print("Becoming House keeper");
+  }
+
+  activityStatistics() {
+    print("Activity Statistics");
+  }
+
+  logout() {
+    UserPreference.to.logoutProfile();
   }
 }

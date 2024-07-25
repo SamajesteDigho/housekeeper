@@ -18,6 +18,7 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: GetBuilder<LoginController>(
+            init: LoginController(),
             builder: (controller) {
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: AppDimension.defaultPadding),

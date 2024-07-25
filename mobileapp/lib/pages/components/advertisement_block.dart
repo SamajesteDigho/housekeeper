@@ -22,6 +22,7 @@ class _AdvertisementBlock extends State<AdvertisementBlock> {
     'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
     'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
   ].map((item) => ImageSlider(url: item)).toList();
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
@@ -32,7 +33,7 @@ class _AdvertisementBlock extends State<AdvertisementBlock> {
           aspectRatio: 2.0,
           onPageChanged: (index, reason) {
             setState(() {
-              _current = index;
+              // _current = index;
             });
           }),
     );
@@ -70,7 +71,7 @@ class ImageSlider extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Here the description for N',
+                      'The Scapes of Antartica',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -80,7 +81,7 @@ class ImageSlider extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      'Here a small description of the article you are coming through. Take note and be crfull...',
+                      'This is a region of the middle east of Lanslater which welcomed the greates seanon of the olympic games...',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: AppDimension.smallText,

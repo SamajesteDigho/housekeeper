@@ -44,7 +44,7 @@ class HttpUtil {
       }, onError: (DioException e, handler) {
         // EasyLoading.dismiss();
         ErrorEntity eInfo = createErrorEntity(e);
-        print('[ERROR Display(${eInfo.code})] : ${eInfo.message}');
+        print('[ERROR (${eInfo.code})] : ${eInfo.message}');
         // MySnackBar.failureSnackBar(
         //   title: '',
         //   message: eInfo.message,
@@ -59,11 +59,11 @@ class HttpUtil {
       case DioExceptionType.cancel:
         return ErrorEntity(code: -1, message: 'Request Cancelled');
       case DioExceptionType.connectionTimeout:
-        return ErrorEntity(code: -1, message: 'network_time_out'.tr);
+        return ErrorEntity(code: -1, message: 'Connection TimeOut'.tr);
       case DioExceptionType.sendTimeout:
-        return ErrorEntity(code: -1, message: 'network_time_out'.tr);
+        return ErrorEntity(code: -1, message: 'Sending TimeOut'.tr);
       case DioExceptionType.receiveTimeout:
-        return ErrorEntity(code: -1, message: 'network_time_out'.tr);
+        return ErrorEntity(code: -1, message: 'Receiving TimeOut'.tr);
       case DioExceptionType.values:
         {
           try {
@@ -77,7 +77,9 @@ class HttpUtil {
                 return ErrorEntity(code: errCode, message: "Forbidden Action");
               case 404:
                 return ErrorEntity(
-                    code: errCode, message: error.response!.data['message'] ?? 'Resource could not be found');
+                  code: errCode,
+                  message: error.response!.data['message'] ?? 'Resource could not be found',
+                );
               case 405:
                 return ErrorEntity(code: errCode, message: "Method Not Allowed");
               case 500:
@@ -99,13 +101,13 @@ class HttpUtil {
                 }
             }
           } on Exception catch (_) {
-            return ErrorEntity(code: -1, message: 'Unknown error. Request abandoned');
+            return ErrorEntity(code: -1, message: '(EXCEPTION) Unknown error. Request abandoned');
           }
         }
       default:
         return ErrorEntity(
           code: -1,
-          message: error.response != null ? error.response?.data : 'network_time_out'.tr,
+          message: error.response == null ? '(DEFAULT) Unpredicted Failure' : '(DEFAULT) ${error.response}',
         );
     }
   }

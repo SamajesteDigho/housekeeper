@@ -342,14 +342,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.19"
-  flutter_popup:
-    dependency: "direct main"
-    description:
-      name: flutter_popup
-      sha256: "8d653ebb04f0e334797aeb5b49eaf7653c57012e1a7cdeac09297dacf79a6524"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.3.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -456,6 +448,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.2"
+  im_stepper:
+    dependency: "direct main"
+    description:
+      name: im_stepper
+      sha256: "84ca411f7c4666cb8762a6dd6eec0353c96c67f674124614263875d0570ca634"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1+1"
   image:
     dependency: transitive
     description:

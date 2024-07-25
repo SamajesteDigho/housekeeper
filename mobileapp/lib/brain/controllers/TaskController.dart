@@ -26,7 +26,11 @@ class TaskController extends GetxController {
   }
 
   loadMyTasks() {
-    TaskAPI.searchMyTasks(myRef: '${user.ref}').then((value) => tasks);
+    TaskAPI.searchMyTasks(myRef: '${user.ref}').then((value) {
+      placed_received.value = value[0];
+      ongoing.value = value[1];
+      completed.value = value[2];
+    });
   }
 
   checkISKeeper() {

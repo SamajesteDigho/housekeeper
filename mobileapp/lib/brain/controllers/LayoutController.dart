@@ -4,7 +4,7 @@ import 'package:housekeeper/brain/data/repositories/layout_repository.dart';
 import 'package:housekeeper/brain/routes/names.dart';
 import 'package:housekeeper/pages/base/account_page.dart';
 import 'package:housekeeper/pages/base/home_page.dart';
-import 'package:housekeeper/pages/base/order_page.dart';
+import 'package:housekeeper/pages/base/task_page.dart';
 import 'package:housekeeper/pages/base/search_page.dart';
 
 class LayoutController extends GetxController {

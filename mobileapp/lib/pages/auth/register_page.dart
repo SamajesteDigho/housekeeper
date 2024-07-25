@@ -16,6 +16,7 @@ class RegisterPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: GetBuilder<RegisterController>(
+            init: RegisterController(),
             builder: (controller) {
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: AppDimension.defaultPadding),

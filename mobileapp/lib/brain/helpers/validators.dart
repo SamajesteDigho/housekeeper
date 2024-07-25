@@ -12,4 +12,11 @@ class InputValidator {
     }
     return null;
   }
+
+  static String? phoneNumberValidator(String? phone) {
+    if(phone == null || phone.isEmpty) {
+      return 'This field must not be empty';
+    }
+    return null;
+  }
 }

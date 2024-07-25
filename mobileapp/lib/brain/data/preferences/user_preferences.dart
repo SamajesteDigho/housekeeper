@@ -67,6 +67,6 @@ class UserPreference extends GetxController {
     _deviceToken.value = '';
     _authToken.value = '';
     _isLogin.value = false;
-    Get.offAllNamed(AppRoutes.login);
+    Get.offAllNamed(AppRoutes.initial);
   }
 }

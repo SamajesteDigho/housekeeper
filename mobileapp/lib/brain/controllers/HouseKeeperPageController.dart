@@ -2,24 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/api/HouseKeeperAPI.dart';
 import 'package:housekeeper/brain/data/models/keepers.dart';
+import 'package:housekeeper/brain/data/models/user.dart';
+import 'package:housekeeper/brain/data/preferences/user_preferences.dart';
 import 'package:housekeeper/brain/routes/names.dart';
 
-class HomeController extends GetxController {
-  HomeController();
+class HouseKeeperPageController extends GetxController {
+  HouseKeeperPageController();
 
   final formKey = GlobalKey<FormState>();
 
-  RxList<KeeperModel> top_keepers = <KeeperModel>[].obs;
-  RxList<KeeperModel> near_keepers = <KeeperModel>[].obs;
+  Rx<KeeperModel> keeper = KeeperModel().obs;
+  Rx<UserModel?> user = UserModel().obs;
+  var args = Get.arguments;
 
   @override
   void onInit() {
     super.onInit();
-    initialAPICalls();
+    keeper.value = args['keeper'];
+    user.value = keeper.value.user;
   }
 
-  void initialAPICalls() {
-    HouseKeeperAPI.topKeepers().then((value) => top_keepers.value = value);
-    HouseKeeperAPI.nearKeepers().then((value) => near_keepers.value = value);
-  }
+  void openTask() {}
+
+  void openChat() {}
 }

@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:housekeeper/brain/api/UserAPI.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
 import 'package:housekeeper/brain/data/preferences/user_preferences.dart';
@@ -31,14 +29,14 @@ class RequestWorkerPageController extends GetxController {
   String? nationality = '';
   String? province = '';
   String? religion = '';
-  String? country_res = '';
-  String? province_res = '';
-  String? city_res = '';
-  String? full_address = '';
+  String? countryRes = '';
+  String? provinceRes = '';
+  String? cityRes = '';
+  String? fullAddress = '';
   String? fax = '';
-  String? post_code = '';
+  String? postCode = '';
 
-  Rx<File> id_doc = File(AppStrings.ID_DOC_EXAMPLE).obs;
+  Rx<File> idDoc = File(AppStrings.idDocModel).obs;
 
   Map<String, dynamic> userInfoCollected = {};
   Map<String, dynamic> userMoreCollected = {};
@@ -79,16 +77,16 @@ class RequestWorkerPageController extends GetxController {
         'nationality': nationality!.isEmpty ? null : nationality,
         'province': province!.isEmpty ? null : province,
         'religion': religion!.isEmpty ? null : religion,
-        'country': country_res!.isEmpty ? null : country_res,
-        'province_res': province_res!.isEmpty ? null : province_res,
-        'city': city_res!.isEmpty ? null : city_res,
-        'full_address': full_address!.isEmpty ? null : full_address,
+        'country': countryRes!.isEmpty ? null : countryRes,
+        'province_res': provinceRes!.isEmpty ? null : provinceRes,
+        'city': cityRes!.isEmpty ? null : cityRes,
+        'full_address': fullAddress!.isEmpty ? null : fullAddress,
         'fax': fax,
-        'postal_code': post_code
+        'postal_code': postCode
       };
       currentPage.value = 2;
     } else if (currentPage.value == 2) {
-      if (id_doc.value.path == AppStrings.ID_DOC_EXAMPLE) {
+      if (idDoc.value.path == AppStrings.idDocModel) {
         Get.snackbar(
           "Error",
           'Please select/take and identification document',
@@ -97,7 +95,7 @@ class RequestWorkerPageController extends GetxController {
         );
         return;
       } else {
-        userIdCollected = {'id_doc': id_doc};
+        userIdCollected = {'id_doc': idDoc};
         currentPage.value = 3;
       }
     } else {}
@@ -110,13 +108,13 @@ class RequestWorkerPageController extends GetxController {
   openGallery() async {
     XFile? image;
     image = await picker.pickImage(source: ImageSource.gallery);
-    image != null ? id_doc.value = File(image.path) : id_doc.value = File(AppStrings.ID_DOC_EXAMPLE);
+    image != null ? idDoc.value = File(image.path) : idDoc.value = File(AppStrings.idDocModel);
   }
 
   openCamera() async {
     XFile? image;
     image = await picker.pickImage(source: ImageSource.camera);
-    image != null ? id_doc.value = File(image.path) : id_doc.value = File(AppStrings.ID_DOC_EXAMPLE);
+    image != null ? idDoc.value = File(image.path) : idDoc.value = File(AppStrings.idDocModel);
   }
 
   submitOfInformation() {}

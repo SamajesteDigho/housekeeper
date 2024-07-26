@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/routes/names.dart';
 
@@ -12,6 +13,8 @@ class RegisterController extends GetxController {
   }
 
   register() {
-    print('Register');
+    if (kDebugMode) {
+      print('Register');
+    }
   }
 }

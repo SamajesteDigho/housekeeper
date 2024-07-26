@@ -10,12 +10,12 @@ class AuthAPI extends GetxService {
   // Define functions for managing the data on the layout yield
 
   static Future<dynamic> login(String pseudo, String password) async {
-    String URL = 'auth/login';
+    String url = 'auth/login';
     Map<String, dynamic> data = {
       'pseudo': pseudo,
       'password': password
     };
-    var response = await http.post(URL, data: data);
+    var response = await http.post(url, data: data);
     if (response['status_code'] == 200) {
       Map<String, dynamic> result = response['data'];
       UserModel user = UserModel.fromJSON(result['result']);

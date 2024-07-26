@@ -12,13 +12,13 @@ class RatingStarts extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         for (int x = 0; x < 5; x++)
-          x < rating!.floor()
+          x < rating.floor()
               ? const Icon(
                   Icons.star,
                   size: AppDimension.smallIcon,
                   color: Colors.yellow,
                 )
-              : x > rating! - 1 && x < rating!
+              : x > rating - 1 && x < rating
                   ? const Icon(
                       Icons.star_half_sharp,
                       size: AppDimension.smallIcon,

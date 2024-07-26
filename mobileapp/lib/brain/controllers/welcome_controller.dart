@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
-import 'package:housekeeper/brain/api/HouseKeeperAPI.dart';
-import 'package:housekeeper/brain/api/UserAPI.dart';
-import 'package:housekeeper/brain/data/hive/user_repo.dart';
+import 'package:housekeeper/brain/api/house_keeper_api.dart';
 import 'package:housekeeper/brain/data/models/keepers.dart';
-import 'package:housekeeper/brain/data/models/user.dart';
 import 'package:housekeeper/brain/data/preferences/user_preferences.dart';
 import 'package:housekeeper/brain/data/repositories/welcome_repository.dart';
 import 'package:housekeeper/brain/routes/names.dart';

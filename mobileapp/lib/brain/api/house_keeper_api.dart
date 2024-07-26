@@ -7,8 +7,8 @@ class HouseKeeperAPI extends GetxService {
   static final HttpUtil http = HttpUtil();
 
   static Future<List<KeeperModel>> topKeepers() {
-    String URL = 'keepers/top/search';
-    return http.get(URL).then((response) {
+    String url = 'keepers/top/search';
+    return http.get(url).then((response) {
       List<KeeperModel> keepers = [];
       var data = response['data'];
       if (response['status_code'] == 200) {
@@ -22,8 +22,8 @@ class HouseKeeperAPI extends GetxService {
   }
 
   static Future<List<KeeperModel>> nearKeepers() {
-    String URL = 'keepers/near/search';
-    return http.get(URL).then((response) {
+    String url = 'keepers/near/search';
+    return http.get(url).then((response) {
       List<KeeperModel> keepers = [];
       var data = response['data'];
       if (response['status_code'] == 200) {
@@ -37,12 +37,12 @@ class HouseKeeperAPI extends GetxService {
   }
 
   static Future<List<KeeperModel>> searchData({String? searchTerm, List<String>? filter}) {
-    String URL = 'keepers/keeper/search';
+    String url = 'keepers/keeper/search';
     Map<String, dynamic> queryParams = {
       'searchTerm': searchTerm,
       'filter': filter
     };
-    return http.get(URL, queryParams: queryParams).then((response) {
+    return http.get(url, queryParams: queryParams).then((response) {
       List<KeeperModel> keepers = [];
       var data = response['data'];
       if (response['status_code'] == 200) {

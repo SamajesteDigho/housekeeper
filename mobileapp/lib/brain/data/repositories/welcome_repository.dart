@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/helpers/dio.dart';
 
@@ -9,6 +10,8 @@ class WelcomeRepository extends GetxService {
 
   Future ping() async {
     var response = await http.get('');
-    print(response);
+    if (kDebugMode) {
+      print(response);
+    }
   }
 }

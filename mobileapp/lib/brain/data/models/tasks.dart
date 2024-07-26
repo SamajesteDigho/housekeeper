@@ -11,16 +11,16 @@ class TaskModel {
   String? description;
   DateTime? start;
   DateTime? end;
-  double? price_per_hour;
+  double? pricePerHour;
   String? currency;
   double? reduction;
   String? status;
   double? rating;
   String? appreciation;
   bool? paid;
-  String? payment_ref;
-  DateTime? created_at;
-  DateTime? updated_at;
+  String? paymentRef;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   TaskModel({
     this.id,
@@ -30,15 +30,15 @@ class TaskModel {
     this.description,
     this.start,
     this.end,
-    this.price_per_hour,
+    this.pricePerHour,
     this.currency,
     this.reduction,
     this.status,
     this.appreciation,
     this.paid,
-    this.payment_ref,
-    this.created_at,
-    this.updated_at,
+    this.paymentRef,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory TaskModel.fromJSON(Map<String, dynamic> json) => TaskModel(
@@ -49,15 +49,15 @@ class TaskModel {
         description: json['description'],
         start: DateTime.tryParse(json['start']),
         end: DateTime.tryParse(json['end']),
-        price_per_hour: double.tryParse('${json['price_per_hour']}'),
+        pricePerHour: double.tryParse('${json['price_per_hour']}'),
         currency: json['currency'],
         reduction: double.tryParse('${json['reduction']}'),
         status: json['status'],
         appreciation: json['appreciation'],
         paid: json['paid'],
-        payment_ref: json['payment_ref'],
-        created_at: DateTime.tryParse(json['created_at']),
-        updated_at: DateTime.tryParse(json['updated_at']),
+        paymentRef: json['payment_ref'],
+        createdAt: DateTime.tryParse(json['created_at']),
+        updatedAt: DateTime.tryParse(json['updated_at']),
       );
 
   Map<String, dynamic> toJSON() => {};
@@ -91,12 +91,12 @@ class TaskModel {
         '          DESCRIPTION: $description\n'
         '          START: $start\n'
         '          END: $end\n'
-        '          PRICE/H: $currency $price_per_hour\n'
+        '          PRICE/H: $currency $pricePerHour\n'
         '          REDUCTION: $reduction\n'
         '          STATUS: $status\n'
         '          APPRECIATION: $appreciation\n'
         '          PAID: $paid\n'
-        '          PAYMENT_REF: $payment_ref\n'
+        '          PAYMENT_REF: $paymentRef\n'
         '============================----------=============================\n';
   }
 }

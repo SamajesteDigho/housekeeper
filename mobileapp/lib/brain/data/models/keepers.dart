@@ -21,9 +21,9 @@ class KeeperModel {
   @HiveField(8)
   bool? verified;
   @HiveField(9)
-  DateTime? created_at;
+  DateTime? createdAt;
   @HiveField(10)
-  DateTime? updated_at;
+  DateTime? updatedAt;
 
   KeeperModel({
     this.id,
@@ -35,8 +35,8 @@ class KeeperModel {
     this.province,
     this.religion,
     this.verified,
-    this.created_at,
-    this.updated_at,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory KeeperModel.fromJSON(Map<String, dynamic> json) => KeeperModel(
@@ -48,8 +48,8 @@ class KeeperModel {
         nationality: json['keeper']['nationality'],
         religion: json['keeper']['religion'],
         verified: json['keeper']['verified'],
-        created_at: DateTime.tryParse(json['keeper']['created_at'] ?? ''),
-        updated_at: DateTime.tryParse(json['keeper']['updated_at'] ?? ''),
+        createdAt: DateTime.tryParse(json['keeper']['created_at'] ?? ''),
+        updatedAt: DateTime.tryParse(json['keeper']['updated_at'] ?? ''),
       );
 
   Map<String, dynamic> toJSON() => {
@@ -62,8 +62,8 @@ class KeeperModel {
         'province': province,
         'religion': religion,
         'verified': verified,
-        'created_at': created_at?.toString(),
-        'updated_at': updated_at?.toString(),
+        'created_at': createdAt?.toString(),
+        'updated_at': updatedAt?.toString(),
       };
 
   @override

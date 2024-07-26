@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as GETX;
+import 'package:get/get.dart' as get_x;
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
+import 'package:flutter/foundation.dart';
 
 class HttpUtil {
   static final HttpUtil _instance = HttpUtil._internal();
@@ -44,7 +45,9 @@ class HttpUtil {
       }, onError: (DioException e, handler) {
         // EasyLoading.dismiss();
         ErrorEntity eInfo = createErrorEntity(e);
-        print('[ERROR (${eInfo.code})] : ${eInfo.message}');
+        if (kDebugMode) {
+          print('[ERROR (${eInfo.code})] : ${eInfo.message}');
+        }
         // MySnackBar.failureSnackBar(
         //   title: '',
         //   message: eInfo.message,
@@ -64,7 +67,7 @@ class HttpUtil {
         return ErrorEntity(code: -1, message: 'Sending TimeOut'.tr);
       case DioExceptionType.receiveTimeout:
         return ErrorEntity(code: -1, message: 'Receiving TimeOut'.tr);
-      case DioExceptionType.values:
+      case DioExceptionType.unknown:
         {
           try {
             int errCode = error.response != null ? error.response!.statusCode! : -1;
@@ -113,7 +116,7 @@ class HttpUtil {
   }
 
   onError(ErrorEntity eInfo) {
-    GETX.Get.snackbar(
+    get_x.Get.snackbar(
       "",
       eInfo.message,
       backgroundColor: Colors.red,
@@ -138,7 +141,9 @@ class HttpUtil {
       bool list = false,
       String cacheKey = '',
       bool cacheDisk = false}) async {
-    print("Requesting [GET] ${AppStrings.baseServerURL}$path");
+    if (kDebugMode) {
+      print("Requesting [GET] ${AppStrings.baseServerURL}$path");
+    }
     Options requestOptions = options ?? Options();
     requestOptions.extra ??= {};
     requestOptions.extra!
@@ -154,7 +159,9 @@ class HttpUtil {
   }
 
   Future<dynamic> post(String path, {dynamic data, Map<String, dynamic>? queryParameters, Options? options}) async {
-    print("Requesting [POST] ${AppStrings.baseServerURL}$path");
+    if (kDebugMode) {
+      print("Requesting [POST] ${AppStrings.baseServerURL}$path");
+    }
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
     var response = await dio.post(

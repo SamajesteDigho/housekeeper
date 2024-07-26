@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
-import 'package:housekeeper/brain/controllers/TaskController.dart';
+import 'package:housekeeper/brain/controllers/task_controller.dart';
 import 'package:housekeeper/pages/components/task_card.dart';
 
 class OrderPage extends StatelessWidget {
@@ -40,7 +40,7 @@ class OrderPage extends StatelessWidget {
                               Obx(
                                 () => Tab(
                                   child: Text(
-                                    'Received ${controller.placed_received.isNotEmpty ? '(${controller.placed_received.length})' : ''}',
+                                    'Received ${controller.placedReceived.isNotEmpty ? '(${controller.placedReceived.length})' : ''}',
                                   ),
                                 ),
                               ),
@@ -63,7 +63,7 @@ class OrderPage extends StatelessWidget {
                               Obx(
                                 () => Tab(
                                   child: Text(
-                                    'Placed ${controller.placed_received.isNotEmpty ? '(${controller.placed_received.length})' : ''}',
+                                    'Placed ${controller.placedReceived.isNotEmpty ? '(${controller.placedReceived.length})' : ''}',
                                   ),
                                 ),
                               ),
@@ -104,7 +104,7 @@ class OrderPage extends StatelessWidget {
     return SingleChildScrollView(
       child: GetBuilder<TaskController>(builder: (controller) {
         return Obx(
-          () => controller.placed_received.isEmpty
+          () => controller.placedReceived.isEmpty
               ? const Center(
                   child: Text(
                     'No Task',
@@ -115,7 +115,7 @@ class OrderPage extends StatelessWidget {
                     ),
                   ),
                 )
-              : Column(children: controller.placed_received.map((element) => TaskCard(task: element)).toList()),
+              : Column(children: controller.placedReceived.map((element) => TaskCard(task: element)).toList()),
         );
       }),
     );

@@ -7,8 +7,8 @@ class TaskAPI extends GetxService {
   static final HttpUtil http = HttpUtil();
 
   static Future<List> searchMyTasks({required String myRef}) {
-    String URL = 'tasks/$myRef/my_tasks';
-    return http.get(URL).then((response) {
+    String url = 'tasks/$myRef/my_tasks';
+    return http.get(url).then((response) {
       List<TaskModel> orders = [];
       var data = response['data'];
       if (response['status_code'] == 200) {

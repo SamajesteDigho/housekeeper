@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
-import 'package:housekeeper/brain/controllers/SearchController.dart';
-import 'package:housekeeper/pages/components/my_button.dart';
+import 'package:housekeeper/brain/controllers/search_controller.dart';
 import 'package:housekeeper/pages/components/my_input_text_field.dart';
 import 'package:housekeeper/pages/components/testimony.dart';
 
@@ -43,8 +42,8 @@ class SearchPage extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 20),
                       crossAxisCount: 2,
                       children: <Widget>[
-                        for (int i = 0; i < controller.search_result.length; i++)
-                          Testimony(houseKeeper: controller.search_result.value[i]),
+                        for (int i = 0; i < controller.searchResult.length; i++)
+                          Testimony(houseKeeper: controller.searchResult[i]),
                       ],
                     )),
               ),
@@ -215,7 +214,7 @@ class _MultiSelectState extends State<MultiSelect> {
           content: SingleChildScrollView(
             child: Obx(
               () => ListBody(
-                children: controller.filter_options
+                children: controller.filterOptions
                     .map(
                       (item) => CheckboxListTile(
                         value: controller.filters.contains(item),

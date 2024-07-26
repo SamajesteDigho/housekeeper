@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
-import 'package:housekeeper/brain/controllers/RegisterController.dart';
+import 'package:housekeeper/brain/controllers/register_controller.dart';
 import 'package:housekeeper/pages/components/clickable_text.dart';
 import 'package:housekeeper/pages/components/my_button.dart';
 import 'package:housekeeper/pages/components/my_input_text_field.dart';

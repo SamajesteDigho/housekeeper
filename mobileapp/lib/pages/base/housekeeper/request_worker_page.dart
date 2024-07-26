@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
-import 'package:housekeeper/brain/controllers/housekeeper/RequestWorkerController.dart';
+import 'package:housekeeper/brain/controllers/housekeeper/request_worker_controller.dart';
 import 'package:housekeeper/brain/helpers/validators.dart';
 import 'package:housekeeper/pages/components/my_input_text_field.dart';
 import 'package:im_stepper/stepper.dart';
@@ -142,29 +142,29 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
                                         MyInputTextField(
                                           label: 'Country (Residence)',
                                           hint: "Select Residence Country",
-                                          text: controller.country_res,
-                                          setText: (value) => controller.country_res = value,
+                                          text: controller.countryRes,
+                                          setText: (value) => controller.countryRes = value,
                                           validator: InputValidator.nameValidator,
                                         ),
                                         MyInputTextField(
                                           label: 'Province (Residence)',
                                           hint: "Entre your Province",
-                                          text: controller.province_res,
-                                          setText: (value) => controller.province_res = value,
+                                          text: controller.provinceRes,
+                                          setText: (value) => controller.provinceRes = value,
                                           validator: InputValidator.nameValidator,
                                         ),
                                         MyInputTextField(
                                           label: 'City (Residence)',
                                           hint: "Enter your city of residence",
-                                          text: controller.city_res,
-                                          setText: (value) => controller.city_res = value,
+                                          text: controller.cityRes,
+                                          setText: (value) => controller.cityRes = value,
                                           validator: InputValidator.nameValidator,
                                         ),
                                         MyInputTextField(
                                           label: 'Full Address',
                                           hint: "Enter your full Address",
-                                          text: controller.full_address,
-                                          setText: (value) => controller.full_address = value,
+                                          text: controller.fullAddress,
+                                          setText: (value) => controller.fullAddress = value,
                                           validator: InputValidator.nameValidator,
                                         ),
                                         MyInputTextField(
@@ -176,8 +176,8 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
                                         MyInputTextField(
                                           label: 'Postal code',
                                           hint: "Enter the Postal Code",
-                                          text: controller.post_code,
-                                          setText: (value) => controller.post_code = value,
+                                          text: controller.postCode,
+                                          setText: (value) => controller.postCode = value,
                                         ),
                                       ],
                                     ),
@@ -205,7 +205,7 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
                                                       )
                                                     ],
                                                     image: DecorationImage(
-                                                      image: FileImage(controller.id_doc.value),
+                                                      image: FileImage(controller.idDoc.value),
                                                       fit: BoxFit.fill,
                                                     ),
                                                   ),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
-import 'package:housekeeper/brain/controllers/HomeController.dart';
-import 'package:housekeeper/brain/controllers/LayoutController.dart';
+import 'package:housekeeper/brain/controllers/home_controller.dart';
+import 'package:housekeeper/brain/controllers/layout_controller.dart';
 import 'package:housekeeper/pages/components/advertisement_block.dart';
 import 'package:housekeeper/pages/components/testimony.dart';
 
@@ -43,8 +43,8 @@ class HomePage extends StatelessWidget {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
-                                  for (int i = 0; i < controller.top_keepers.length; i++)
-                                    Testimony(houseKeeper: controller.top_keepers[i]),
+                                  for (int i = 0; i < controller.topKeepers.length; i++)
+                                    Testimony(houseKeeper: controller.topKeepers[i]),
                                 ],
                               ),
                             )),
@@ -69,8 +69,8 @@ class HomePage extends StatelessWidget {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
-                                  for (int i = 0; i < controller.near_keepers.length; i++)
-                                    Testimony(houseKeeper: controller.near_keepers[i]),
+                                  for (int i = 0; i < controller.nearKeepers.length; i++)
+                                    Testimony(houseKeeper: controller.nearKeepers[i]),
                                 ],
                               ),
                             )),

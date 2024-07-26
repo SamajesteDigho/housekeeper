@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:housekeeper/brain/controllers/LayoutController.dart';
+import 'package:housekeeper/brain/controllers/layout_controller.dart';
 import 'package:housekeeper/pages/components/bottom_navigation_bar.dart';
 
 class LayoutPage extends StatelessWidget {

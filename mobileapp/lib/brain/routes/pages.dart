@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:housekeeper/brain/routes/names.dart';
 import 'package:housekeeper/pages/auth/login_page.dart';
 import 'package:housekeeper/pages/auth/register_page.dart';
-import 'package:housekeeper/pages/base/home_page.dart';
 import 'package:housekeeper/pages/base/housekeeper/housekeeper_display_page.dart';
 import 'package:housekeeper/pages/base/housekeeper/request_worker_page.dart';
 import 'package:housekeeper/pages/base/layout_page.dart';

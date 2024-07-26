@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:housekeeper/brain/api/UserAPI.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
 import 'package:housekeeper/brain/data/preferences/user_preferences.dart';
 import 'package:housekeeper/brain/routes/names.dart';
@@ -13,7 +13,9 @@ class AccountPageController extends GetxController {
   UserModel user = UserPreference.to.profile;
 
   clickEditUser() {
-    print('Editing');
+    if (kDebugMode) {
+      print('Editing');
+    }
   }
 
   becomeHouseKeeper() {
@@ -21,11 +23,15 @@ class AccountPageController extends GetxController {
   }
 
   houseKeeperDetails() {
-    print("Becoming House keeper");
+    if (kDebugMode) {
+      print("Becoming House keeper");
+    }
   }
 
   activityStatistics() {
-    print("Activity Statistics");
+    if (kDebugMode) {
+      print("Activity Statistics");
+    }
   }
 
   logout() {

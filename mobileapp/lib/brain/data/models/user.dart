@@ -16,11 +16,11 @@ class UserModel {
   @HiveField(6)
   String? email;
   @HiveField(7)
-  DateTime? email_verified_at;
+  DateTime? emailVerifiedAt;
   @HiveField(8)
   String? phone;
   @HiveField(9)
-  DateTime? phone_verified_at;
+  DateTime? phoneVerifiedAt;
   @HiveField(10)
   String? role;
   @HiveField(11)
@@ -28,9 +28,9 @@ class UserModel {
   @HiveField(12)
   String? avatar;
   @HiveField(13)
-  DateTime? created_at;
+  DateTime? createdAt;
   @HiveField(14)
-  DateTime? updated_at;
+  DateTime? updatedAt;
 
   UserModel({
     this.id,
@@ -40,14 +40,14 @@ class UserModel {
     this.birthdate,
     this.username,
     this.email,
-    this.email_verified_at,
+    this.emailVerifiedAt,
     this.phone,
-    this.phone_verified_at,
+    this.phoneVerifiedAt,
     this.role,
     this.status,
     this.avatar,
-    this.created_at,
-    this.updated_at,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory UserModel.fromJSON(Map<String, dynamic> json) => UserModel(
@@ -58,14 +58,14 @@ class UserModel {
         birthdate: DateTime.tryParse(json['birthdate']),
         username: json['username'],
         email: json['email'],
-        email_verified_at: DateTime.tryParse(json['email_verified_at'] ?? ''),
+        emailVerifiedAt: DateTime.tryParse(json['email_verified_at'] ?? ''),
         phone: json['phone'],
-        phone_verified_at: DateTime.tryParse(json['phone_verified_at'] ?? ''),
+        phoneVerifiedAt: DateTime.tryParse(json['phone_verified_at'] ?? ''),
         role: json['role'],
         status: json['status'],
         avatar: json['avatar'],
-        created_at: DateTime.tryParse(json['created_at'] ?? ''),
-        updated_at: DateTime.tryParse(json['updated_at'] ?? ''),
+        createdAt: DateTime.tryParse(json['created_at'] ?? ''),
+        updatedAt: DateTime.tryParse(json['updated_at'] ?? ''),
       );
 
   Map<String, dynamic> toJSON() => {
@@ -75,16 +75,15 @@ class UserModel {
         'lastname': lastname,
         'username': username,
         'birthdate': birthdate?.toString(),
-        'username': username,
         'email': email,
-        'email_verified_at': email_verified_at?.toString(),
+        'email_verified_at': emailVerifiedAt?.toString(),
         'phone': phone,
-        'phone_verified_at': phone_verified_at?.toString(),
+        'phone_verified_at': phoneVerifiedAt?.toString(),
         'role': role,
         'status': status,
         'avatar': avatar,
-        'created_at': created_at?.toString(),
-        'updated_at': updated_at?.toString(),
+        'created_at': createdAt?.toString(),
+        'updated_at': updatedAt?.toString(),
       };
 
   @override

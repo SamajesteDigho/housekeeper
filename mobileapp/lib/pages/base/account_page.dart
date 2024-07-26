@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
-import 'package:housekeeper/brain/controllers/AccountPageController.dart';
-import 'package:housekeeper/brain/controllers/HomeController.dart';
+import 'package:housekeeper/brain/controllers/account_oage_controller.dart';
 import 'package:housekeeper/brain/helpers/utilities.dart';
-import 'package:housekeeper/pages/components/bottom_navigation_bar.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});

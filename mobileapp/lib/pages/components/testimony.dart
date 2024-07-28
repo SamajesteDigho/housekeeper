@@ -3,17 +3,18 @@ import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
 import 'package:housekeeper/brain/data/models/keepers.dart';
+import 'package:housekeeper/brain/data/models/user.dart';
 import 'package:housekeeper/brain/routes/names.dart';
 import 'package:housekeeper/pages/components/rating_start.dart';
 
 class Testimony extends StatelessWidget {
-  const Testimony({super.key, required this.houseKeeper});
-  final KeeperModel houseKeeper;
+  const Testimony({super.key, required this.user});
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.toNamed(AppRoutes.houseKeeperPage, arguments: {'keeper': houseKeeper}),
+      onTap: () => Get.toNamed(AppRoutes.houseKeeperPage, arguments: {'user': user}),
       child: Card(
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
@@ -26,14 +27,14 @@ class Testimony extends StatelessWidget {
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  image: houseKeeper.user?.avatar == null
+                  image: user.avatar == null
                       ? const DecorationImage(image: AssetImage(AppStrings.logoDark))
-                      : DecorationImage(image: NetworkImage(houseKeeper.user!.avatar!)),
+                      : DecorationImage(image: NetworkImage(user.avatar!)),
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
               Text(
-                '${houseKeeper.user?.firstname} ${houseKeeper.user?.lastname}',
+                '${user.firstname} ${user.lastname}',
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -44,7 +45,7 @@ class Testimony extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              RatingStarts(rating: houseKeeper.rating ?? 0),
+              RatingStars(rating: user.keeper?.rating ?? 0),
             ],
           ),
         ),

@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
                                   for (int i = 0; i < controller.topKeepers.length; i++)
-                                    Testimony(houseKeeper: controller.topKeepers[i]),
+                                    Testimony(user: controller.topKeepers[i]),
                                 ],
                               ),
                             )),
@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
                                   for (int i = 0; i < controller.nearKeepers.length; i++)
-                                    Testimony(houseKeeper: controller.nearKeepers[i]),
+                                    Testimony(user: controller.nearKeepers[i]),
                                 ],
                               ),
                             )),

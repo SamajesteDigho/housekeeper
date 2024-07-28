@@ -2,32 +2,19 @@ import 'package:hive/hive.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
 
 class KeeperModel {
-  @HiveField(0)
   int? id;
-  @HiveField(1)
-  UserModel? user;
-  @HiveField(2)
   String? matricule;
-  @HiveField(3)
   double? rating;
-  @HiveField(4)
   List<String>? images;
-  @HiveField(5)
   String? nationality;
-  @HiveField(6)
   String? province;
-  @HiveField(7)
   String? religion;
-  @HiveField(8)
   bool? verified;
-  @HiveField(9)
   DateTime? createdAt;
-  @HiveField(10)
   DateTime? updatedAt;
 
   KeeperModel({
     this.id,
-    this.user,
     this.matricule,
     this.rating,
     this.images,
@@ -40,20 +27,18 @@ class KeeperModel {
   });
 
   factory KeeperModel.fromJSON(Map<String, dynamic> json) => KeeperModel(
-        user: UserModel.fromJSON(json),
-        id: json['keeper']['id'],
-        matricule: json['keeper']['matricule'],
-        rating: double.tryParse('${json['keeper']['rating']}'),
-        images: json['keeper']['images'],
-        nationality: json['keeper']['nationality'],
-        religion: json['keeper']['religion'],
-        verified: json['keeper']['verified'],
-        createdAt: DateTime.tryParse(json['keeper']['created_at'] ?? ''),
-        updatedAt: DateTime.tryParse(json['keeper']['updated_at'] ?? ''),
+        id: json['id'],
+        matricule: json['matricule'],
+        rating: double.tryParse('${json['rating']}'),
+        images: json['images'],
+        nationality: json['nationality'],
+        religion: json['religion'],
+        verified: json['verified'],
+        createdAt: DateTime.tryParse(json['created_at'] ?? ''),
+        updatedAt: DateTime.tryParse(json['updated_at'] ?? ''),
       );
 
   Map<String, dynamic> toJSON() => {
-        'user': user?.toJSON(),
         'id': id,
         'matricule': matricule,
         'rating': rating,
@@ -76,7 +61,6 @@ class KeeperModel {
         '          Province: $province\n'
         '          Religion: $religion\n'
         '          Verified: $verified\n'
-        '          Name: ${user?.firstname} ${user?.lastname}\n'
         '============================----------=============================\n';
   }
 }

@@ -50,7 +50,7 @@ class TaskCard extends StatelessWidget {
                             fontSize: AppDimension.mediumText,
                           ),
                         ),
-                        RatingStarts(rating: task.rating ?? 0),
+                        RatingStars(rating: task.rating ?? 0),
                       ],
                     ),
                   ],

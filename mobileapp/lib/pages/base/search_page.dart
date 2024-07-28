@@ -43,7 +43,7 @@ class SearchPage extends StatelessWidget {
                       crossAxisCount: 2,
                       children: <Widget>[
                         for (int i = 0; i < controller.searchResult.length; i++)
-                          Testimony(houseKeeper: controller.searchResult[i]),
+                          Testimony(user: controller.searchResult[i]),
                       ],
                     )),
               ),

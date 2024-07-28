@@ -6,6 +6,13 @@ class InputValidator {
     return null;
   }
 
+  static String? numberValidator(String? number) {
+    if (number == null || number.isEmpty) {
+      return 'This field is required';
+    }
+    return null;
+  }
+
   static String? passwordValidator(String? pass) {
     if(pass == null || pass.isEmpty) {
       return 'This field must not be empty';

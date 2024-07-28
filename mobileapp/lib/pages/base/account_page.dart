@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
-import 'package:housekeeper/brain/controllers/account_oage_controller.dart';
+import 'package:housekeeper/brain/controllers/account_page_controller.dart';
 import 'package:housekeeper/brain/helpers/utilities.dart';
 
 class AccountPage extends StatelessWidget {

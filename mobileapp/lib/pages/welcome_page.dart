@@ -43,7 +43,7 @@ class _WelcomePage extends State<WelcomePage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,7 +71,7 @@ class _WelcomePage extends State<WelcomePage> {
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
+                          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
                           child: Column(
                             children: [
                               AnimatedText(
@@ -103,25 +103,28 @@ class _WelcomePage extends State<WelcomePage> {
                             'the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through'
                             ' the cites of the word in classical literature, discovered the undoubtable source.',
                             style: TextStyle(color: Colors.white, fontSize: 14),
+                            textAlign: TextAlign.justify,
                           ),
                         ),
-                        Container(
-                          height: 200,
-                          margin: const EdgeInsets.only(top: 30),
-                          padding: const EdgeInsets.symmetric(horizontal: AppDimension.defaultPadding),
-                          decoration: const BoxDecoration(color: Colors.transparent),
-                          child: Obx(
-                            () => ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: controller.testimonies
-                                  .map(
-                                    (element) => Testimony(
-                                      houseKeeper: element,
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ),
+                        Obx(
+                          () => controller.testimonies.isEmpty
+                              ? const SizedBox()
+                              : Container(
+                                  height: 200,
+                                  margin: const EdgeInsets.only(top: 30),
+                                  padding: const EdgeInsets.symmetric(horizontal: AppDimension.defaultPadding),
+                                  decoration: const BoxDecoration(color: Colors.transparent),
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: controller.testimonies
+                                        .map(
+                                          (element) => Testimony(
+                                            user: element,
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
+                                ),
                         ),
                         Card(
                           elevation: 2,

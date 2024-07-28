@@ -10,6 +10,8 @@ class MyInputTextField extends StatefulWidget {
   final int? maxNumberOfLine;
   final Function? setText;
   final Function? validator;
+  final EdgeInsets? padding;
+  final TextInputType? inputType;
   const MyInputTextField({
     super.key,
     required this.label,
@@ -20,6 +22,8 @@ class MyInputTextField extends StatefulWidget {
     this.text,
     this.setText,
     this.validator,
+    this.padding,
+    this.inputType,
   });
 
   @override
@@ -39,10 +43,11 @@ class _MyInputTextFieldState extends State<MyInputTextField> {
             widget.setText!(value);
           }
         },
+        keyboardType: widget.inputType ?? TextInputType.text,
         validator: widget.validator == null ? null : (value) => widget.validator!(value),
         controller: TextEditingController(text: widget.text),
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 20),
           hintMaxLines: 1,
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.blueAccent),
@@ -60,9 +65,10 @@ class _MyInputTextFieldState extends State<MyInputTextField> {
             borderSide: const BorderSide(color: Colors.redAccent, width: 2),
             borderRadius: BorderRadius.circular(4),
           ),
-          prefixIcon: widget.icon == null ? null : Icon(widget.icon, color: Colors.black, size: AppDimension.mediumIcon),
+          prefixIcon:
+              widget.icon == null ? null : Icon(widget.icon, color: Colors.black, size: AppDimension.mediumIcon),
           hintText: widget.hint,
-          hintStyle: const TextStyle(color: Colors.grey),
+          hintStyle: const TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
           labelText: widget.label,
           labelStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           filled: true,

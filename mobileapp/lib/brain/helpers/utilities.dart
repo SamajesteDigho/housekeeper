@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class MyUtilities {
   static List<String> days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   static List<String> daysFull = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -26,6 +28,13 @@ class MyUtilities {
     } else {
       return '${days[date.weekday - 1]} ${months[date.month - 1]} ${date.day}, ${date.year}';
     }
+  }
+
+  static String parseTime(TimeOfDay? time, {bool full = false}) {
+    if (time == null) {
+      return '';
+    }
+    return '${time.hour} : ${time.minute}';
   }
 
   static int getAge(DateTime? date) {

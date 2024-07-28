@@ -8,4 +8,6 @@ class AppRoutes {
 
   static const requestWorker = '/requestWorker';
   static const houseKeeperPage = '/houseKeeperPage';
+
+  static const openNewTask = '/openNewTask';
 }

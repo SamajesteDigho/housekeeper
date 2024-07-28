@@ -1,4 +1,6 @@
 import 'package:hive/hive.dart';
+import 'package:housekeeper/brain/data/models/address.dart';
+import 'package:housekeeper/brain/data/models/keepers.dart';
 
 class UserModel {
   @HiveField(0)
@@ -31,6 +33,8 @@ class UserModel {
   DateTime? createdAt;
   @HiveField(14)
   DateTime? updatedAt;
+  KeeperModel? keeper;
+  AddressModel? address;
 
   UserModel({
     this.id,
@@ -48,6 +52,8 @@ class UserModel {
     this.avatar,
     this.createdAt,
     this.updatedAt,
+    this.keeper,
+    this.address,
   });
 
   factory UserModel.fromJSON(Map<String, dynamic> json) => UserModel(
@@ -66,6 +72,8 @@ class UserModel {
         avatar: json['avatar'],
         createdAt: DateTime.tryParse(json['created_at'] ?? ''),
         updatedAt: DateTime.tryParse(json['updated_at'] ?? ''),
+        keeper: json['keeper'] == null ? null : KeeperModel.fromJSON(json['keeper']),
+        address: json['address'] == null ? null : AddressModel.fromJSON(json['address']),
       );
 
   Map<String, dynamic> toJSON() => {
@@ -84,6 +92,8 @@ class UserModel {
         'avatar': avatar,
         'created_at': createdAt?.toString(),
         'updated_at': updatedAt?.toString(),
+        'keeper': keeper?.toJSON(),
+        'address': address?.toJSON(),
       };
 
   @override

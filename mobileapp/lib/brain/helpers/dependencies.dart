@@ -4,11 +4,12 @@ import 'package:housekeeper/brain/api/auth_api.dart';
 import 'package:housekeeper/brain/api/house_keeper_api.dart';
 import 'package:housekeeper/brain/api/task_api.dart';
 import 'package:housekeeper/brain/api/user_api.dart';
-import 'package:housekeeper/brain/controllers/account_oage_controller.dart';
+import 'package:housekeeper/brain/controllers/account_page_controller.dart';
 import 'package:housekeeper/brain/controllers/home_controller.dart';
 import 'package:housekeeper/brain/controllers/house_keeper_page_controller.dart';
 import 'package:housekeeper/brain/controllers/layout_controller.dart';
 import 'package:housekeeper/brain/controllers/login_controller.dart';
+import 'package:housekeeper/brain/controllers/task/create_new_task_controller.dart';
 import 'package:housekeeper/brain/controllers/task_controller.dart';
 import 'package:housekeeper/brain/controllers/register_controller.dart';
 import 'package:housekeeper/brain/controllers/search_controller.dart';
@@ -50,4 +51,5 @@ Future<void> initDependencies() async {
   Get.lazyPut(() => AccountPageController());
   Get.lazyPut(() => RequestWorkerPageController());
   Get.lazyPut(() => HouseKeeperPageController());
+  Get.lazyPut(() => CreateNewTaskController());
 }

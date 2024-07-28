@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
 
-class RatingStarts extends StatelessWidget {
-  const RatingStarts({super.key, required this.rating});
+class RatingStars extends StatelessWidget {
+  const RatingStars({super.key, required this.rating});
   final double rating;
 
   @override

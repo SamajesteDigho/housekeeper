@@ -40,19 +40,15 @@ class HttpUtil {
     dio.interceptors.add(
       InterceptorsWrapper(onRequest: (options, handler) {
         return handler.next(options);
-      }, onResponse: (response, handler) {
+      }, onResponse: (Response response, ResponseInterceptorHandler handler) {
         return handler.next(response);
       }, onError: (DioException e, handler) {
-        // EasyLoading.dismiss();
         ErrorEntity eInfo = createErrorEntity(e);
         if (kDebugMode) {
+          print(e);
+          print("===============================================================");
           print('[ERROR (${eInfo.code})] : ${eInfo.message}');
         }
-        // MySnackBar.failureSnackBar(
-        //   title: '',
-        //   message: eInfo.message,
-        // );
-        // return handler.next(e);
       }),
     );
   }
@@ -62,12 +58,13 @@ class HttpUtil {
       case DioExceptionType.cancel:
         return ErrorEntity(code: -1, message: 'Request Cancelled');
       case DioExceptionType.connectionTimeout:
-        return ErrorEntity(code: -1, message: 'Connection TimeOut'.tr);
+        return ErrorEntity(code: -1, message: 'Connection TimeOut');
       case DioExceptionType.sendTimeout:
-        return ErrorEntity(code: -1, message: 'Sending TimeOut'.tr);
+        return ErrorEntity(code: -1, message: 'Sending TimeOut');
       case DioExceptionType.receiveTimeout:
-        return ErrorEntity(code: -1, message: 'Receiving TimeOut'.tr);
+        return ErrorEntity(code: -1, message: 'Receiving TimeOut');
       case DioExceptionType.unknown:
+      case DioExceptionType.values:
         {
           try {
             int errCode = error.response != null ? error.response!.statusCode! : -1;
@@ -93,6 +90,8 @@ class HttpUtil {
                 return ErrorEntity(code: errCode, message: "Service Unavailable");
               case 505:
                 return ErrorEntity(code: errCode, message: "HTTP Version Not Supported");
+              case 302:
+                return ErrorEntity(code: errCode, message: "Resource redirected temporally");
               default:
                 {
                   return ErrorEntity(
@@ -110,7 +109,7 @@ class HttpUtil {
       default:
         return ErrorEntity(
           code: -1,
-          message: error.response == null ? '(DEFAULT) Unpredicted Failure' : '(DEFAULT) ${error.response}',
+          message: error.response == null ? '(DEFAULT) Unpredicted Failure $error' : '(DEFAULT) ${error.response}',
         );
     }
   }
@@ -155,12 +154,14 @@ class HttpUtil {
       options: options,
       cancelToken: cancelToken,
     );
+    print(response.data);
     return response.data;
   }
 
   Future<dynamic> post(String path, {dynamic data, Map<String, dynamic>? queryParameters, Options? options}) async {
     if (kDebugMode) {
       print("Requesting [POST] ${AppStrings.baseServerURL}$path");
+      print(data);
     }
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
@@ -171,6 +172,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
+    print(response.data);
     return response.data;
   }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
+import 'package:housekeeper/brain/data/models/address.dart';
 import 'package:housekeeper/brain/data/models/keepers.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
 import 'package:housekeeper/brain/data/preferences/storage_service.dart';
@@ -12,12 +13,14 @@ class UserPreference extends GetxController {
 
   final RxBool _isLogin = false.obs;
   final Rx<UserModel> _profile = UserModel().obs;
-  final Rx<KeeperModel?> _keeper = null.obs;
+  // final Rx<KeeperModel?> _keeper = null.obs;
+  // final Rx<AddressModel?> _address = null.obs;
   final RxString _deviceToken = ''.obs;
   final RxString _authToken = ''.obs;
 
   UserModel get profile => _profile.value;
-  KeeperModel? get keeper => _keeper.value;
+  // KeeperModel? get keeper => _keeper.value;
+  // AddressModel? get address => _address.value;
   bool get isLoggedIn => _isLogin.value;
   String get deviceToken => _deviceToken.value;
   String get authToken => _authToken.value;
@@ -25,28 +28,18 @@ class UserPreference extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    var element = StorageService.to.getString(key: AppStrings.prefUserProfileKey);
-    var kElement = StorageService.to.getString(key: AppStrings.prefKeeperProfileKey);
-    if (element.isNotEmpty) {
-      _isLogin.value = true;
-      _profile(UserModel.fromJSON(jsonDecode(element)));
-    }
-    kElement.isNotEmpty ? _keeper.value = KeeperModel.fromJSON(jsonDecode(kElement)) : _keeper.value = null;
-    _deviceToken.value = StorageService.to.getString(key: AppStrings.prefUserDeviceTokenKey);
-    _authToken.value = StorageService.to.getString(key: AppStrings.prefUserAuthTokenKey);
+    getProfile();
   }
 
   /// Saving user profile to local storage
   Future<void> saveProfile({required UserModel profile}) async {
     await StorageService.to.setString(key: AppStrings.prefUserProfileKey, value: jsonEncode(profile.toJSON()));
+    await StorageService.to.setString(key: AppStrings.prefKeeperProfileKey, value: jsonEncode(profile.keeper?.toJSON()));
+    await StorageService.to.setString(key: AppStrings.prefUserAddressKey, value: jsonEncode(profile.address?.toJSON()));
     _isLogin.value = true;
     _profile.value = profile;
-  }
-
-  /// Saving keeper info to local storage
-  Future<void> saveKeeper({required KeeperModel keeper}) async {
-    await StorageService.to.setString(key: AppStrings.prefKeeperProfileKey, value: jsonEncode(keeper.toJSON()));
-    _keeper.value = keeper;
+    // _keeper.value = profile.keeper;
+    // _address.value = profile.address;
   }
 
   /// Saving user device token to local storage
@@ -63,12 +56,12 @@ class UserPreference extends GetxController {
   /// Getting user profile from local storage
   void getProfile() {
     var element = StorageService.to.getString(key: AppStrings.prefUserProfileKey);
-    var kElement = StorageService.to.getString(key: AppStrings.prefKeeperProfileKey);
     if (element.isNotEmpty) {
       _isLogin.value = true;
       _profile.value = UserModel.fromJSON(jsonDecode(element));
     }
-    kElement.isNotEmpty ? _keeper.value = KeeperModel.fromJSON(jsonDecode(kElement)) : _keeper.value = null;
+    // _keeper.value = _profile.value.keeper;
+    // _address.value = _profile.value.address;
     _authToken.value = StorageService.to.getString(key: AppStrings.prefUserAuthTokenKey);
     _deviceToken.value = StorageService.to.getString(key: AppStrings.prefUserDeviceTokenKey);
   }
@@ -80,7 +73,8 @@ class UserPreference extends GetxController {
     await StorageService.to.remove(key: AppStrings.prefUserDeviceTokenKey);
     await StorageService.to.remove(key: AppStrings.prefUserDeviceTokenKey);
     _profile.value = UserModel();
-    _keeper.value = null;
+    // _keeper.value = null;
+    // _address.value = null;
     _deviceToken.value = '';
     _authToken.value = '';
     _isLogin.value = false;

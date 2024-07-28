@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/api/house_keeper_api.dart';
 import 'package:housekeeper/brain/data/models/keepers.dart';
+import 'package:housekeeper/brain/data/models/user.dart';
 
 class HomeController extends GetxController {
   HomeController();
 
   final formKey = GlobalKey<FormState>();
 
-  RxList<KeeperModel> topKeepers = <KeeperModel>[].obs;
-  RxList<KeeperModel> nearKeepers = <KeeperModel>[].obs;
+  RxList<UserModel> topKeepers = <UserModel>[].obs;
+  RxList<UserModel> nearKeepers = <UserModel>[].obs;
 
   @override
   void onInit() {

@@ -36,9 +36,11 @@ class Housekeeper extends Model
     /* ================================================================
      * UTILITY AND PARSING FUNCTIONS
     ================================================================*/
-    public static function process_user_keeper(Housekeeper $hk, User $user) : User {
+    public static function process_user_keeper(Housekeeper|null $hk, $user) : User {
         $user = User::parse_user($user);
-
+        if ($hk == null) {
+            return $user;
+        }
         $hk->verified = boolval($hk->verified);
         $hk->rating = floatval($hk->rating);
         $user->keeper = $hk;

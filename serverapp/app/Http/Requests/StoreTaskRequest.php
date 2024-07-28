@@ -24,7 +24,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'client_ref' => 'required | exists:users,ref',
             'keeper_ref' => 'required | exists:users,ref',
-            'description' => 'required | min:10',
+            'description' => 'required | min:1',
             'start' => 'required | date | after:now',
             'end' => 'sometimes | date | after:start',
             'price_per_hour' => 'required | numeric',

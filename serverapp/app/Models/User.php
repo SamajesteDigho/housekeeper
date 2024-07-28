@@ -8,6 +8,7 @@ use Faker\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -66,8 +67,20 @@ class User extends Authenticatable
         return $code;
     }
 
-    public static function parse_user(User $user) {
+    public static function parse_user(User|null $user) {
+        if ($user == null) {
+            return null;
+        }
         $user->avatar = $user->avatar ?? 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . ($user->avatar ?? '/data/avatar/default_male.jpg');
+        $user->address = Address::where(['user_id' => $user->id])->first();
         return $user;
+    }
+
+    public static function parse_user_list($users) {
+        $list = [];
+        foreach($users as $user) {
+            $list[] = User::parse_user($user);
+        }
+        return $list;
     }
 }

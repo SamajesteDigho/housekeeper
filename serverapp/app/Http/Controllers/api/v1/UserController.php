@@ -52,7 +52,7 @@ class UserController extends Controller
         $user->update($query);
 
         $result = [
-            'result' => $user
+            'result' => User::parse_user($user)
         ];
         return Controller::successfulResponse($result, 200);
     }
@@ -111,7 +111,7 @@ class UserController extends Controller
         }
 
         $result = [
-            'result' => $users,
+            'result' => User::parse_user_list($users),
             'count' => $users->count(),
             'search_term' => $term,
             'limit' => $limit,
@@ -128,7 +128,7 @@ class UserController extends Controller
 
         $users = User::forPage($page, $limit)->get();
         $result = [
-            'result' => $users,
+            'result' => User::parse_user_list($users),
             'count' => $users->count(),
             'page' => $page,
             'limit' => $limit,

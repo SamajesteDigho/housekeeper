@@ -33,7 +33,7 @@ class AuthenticateController extends Controller
             
             // Collect keeper info
             $keeper = Housekeeper::where(['user_id' => $user->id])->first();
-            $user->keeper = $keeper;
+            $user->keeper = Housekeeper::process_user_keeper($keeper, $user)->keeper;
             $result = [
                 'result' => $user,
                 'token' => $user->createToken('usertoken')->plainTextToken,

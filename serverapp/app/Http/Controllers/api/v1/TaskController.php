@@ -29,9 +29,9 @@ class TaskController extends Controller
         ];
         return Controller::successfulResponse($result, 200);
     }
-    public function create(StoreTaskRequest $request)
+    public function create(Request $request)
     {
-        $data = $request->validated();
+        $data = $request->all();
         if (Arr::get($data, 'client_ref') == Arr::get($data, 'keeper_ref')) {
             return Controller::failedResponse('Client cannot be Keeper on a given task.');
         }
@@ -58,7 +58,7 @@ class TaskController extends Controller
         ];
         $task = Task::create($query);
         $result = [
-            'result' => $task,
+            'result' => Task::parse_task($task),
             'message' => 'Task created successfully'
         ];
         return Controller::successfulResponse($result, 201);

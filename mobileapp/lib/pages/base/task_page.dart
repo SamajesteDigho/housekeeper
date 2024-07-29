@@ -115,7 +115,14 @@ class OrderPage extends StatelessWidget {
                     ),
                   ),
                 )
-              : Column(children: controller.placedReceived.map((element) => TaskCard(task: element)).toList()),
+              : Column(
+                  children: controller.placedReceived
+                      .map((element) => InkWell(
+                            onTap: () => controller.navigateToPage(element),
+                            child: TaskCard(task: element),
+                          ))
+                      .toList(),
+                ),
         );
       }),
     );
@@ -123,22 +130,32 @@ class OrderPage extends StatelessWidget {
 
   Widget buildOnGoingOrders() {
     return SingleChildScrollView(
-      child: GetBuilder<TaskController>(builder: (controller) {
-        return Obx(
-          () => controller.ongoing.isEmpty
-              ? const Center(
-                  child: Text(
-                    'No Task',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: AppDimension.largeText,
-                      color: Colors.red,
+      child: GetBuilder<TaskController>(
+        init: TaskController(),
+        builder: (controller) {
+          return Obx(
+            () => controller.ongoing.isEmpty
+                ? const Center(
+                    child: Text(
+                      'No Task',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppDimension.largeText,
+                        color: Colors.red,
+                      ),
                     ),
+                  )
+                : Column(
+                    children: controller.ongoing
+                        .map((element) => InkWell(
+                              onTap: () => controller.navigateToPage(element),
+                              child: TaskCard(task: element),
+                            ))
+                        .toList(),
                   ),
-                )
-              : Column(children: controller.ongoing.map((element) => TaskCard(task: element)).toList()),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 
@@ -157,7 +174,16 @@ class OrderPage extends StatelessWidget {
                     ),
                   ),
                 )
-              : Column(children: controller.completed.map((element) => TaskCard(task: element)).toList()),
+              : Column(
+                  children: controller.completed
+                      .map(
+                        (element) => InkWell(
+                          onTap: () => controller.navigateToPage(element),
+                          child: TaskCard(task: element),
+                        ),
+                      )
+                      .toList(),
+                ),
         );
       }),
     );

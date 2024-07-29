@@ -10,6 +10,7 @@ import 'package:housekeeper/brain/controllers/house_keeper_page_controller.dart'
 import 'package:housekeeper/brain/controllers/layout_controller.dart';
 import 'package:housekeeper/brain/controllers/login_controller.dart';
 import 'package:housekeeper/brain/controllers/task/create_new_task_controller.dart';
+import 'package:housekeeper/brain/controllers/task/display_task_controller.dart';
 import 'package:housekeeper/brain/controllers/task_controller.dart';
 import 'package:housekeeper/brain/controllers/register_controller.dart';
 import 'package:housekeeper/brain/controllers/search_controller.dart';
@@ -52,4 +53,5 @@ Future<void> initDependencies() async {
   Get.lazyPut(() => RequestWorkerPageController());
   Get.lazyPut(() => HouseKeeperPageController());
   Get.lazyPut(() => CreateNewTaskController());
+  Get.lazyPut(() => TaskDisplayController());
 }

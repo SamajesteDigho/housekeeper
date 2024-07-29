@@ -85,6 +85,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('{id}', [TaskController::class, 'update'])->name('tasks.update_v1');
         Route::delete('{id}', [TaskController::class, 'delete'])->name('tasks.delete_v1');
 
-        Route::get('{user_ref}/my_tasks', [TaskController::class, 'user_tasks'])->name('tasks.delete_v1');
+        Route::get('{user_ref}/my_tasks', [TaskController::class, 'user_tasks'])->name('tasks.my_tasks_v1');
+        Route::post('{ref}/set_status', [TaskController::class, 'set_status'])->name('tasks.set_status_v1');
+        Route::post('{ref}/appreciate', [TaskController::class, 'appreciate'])->name('tasks.appreciate_v1');
     });
 });

@@ -132,4 +132,41 @@ class TaskController extends Controller
         ];
         return Controller::successfulResponse($result);
     }
+
+    public static function set_status(Request $request)
+    {
+        $data = $request->all();
+        $task_ref = Arr::get($data, 'task_ref');
+        $status = Arr::get($data, 'status');
+
+        $task = Task::where(['ref' => $task_ref])->first();
+        if ($task == null) {
+            return Controller::failedResponse('Could not locate the task');
+        }
+        $task->update(['status' => $status]);
+        $result = [
+            'result' => Task::parse_task($task),
+            'status_set' => true
+        ];
+        return Controller::successfulResponse($result);
+    }
+
+    public static function appreciate(Request $request)
+    {
+        $data = $request->all();
+        $task_ref = Arr::get($data, 'task_ref');
+        $rating = doubleval(Arr::get($data, 'rating'));
+        $appreciation = Arr::get($data, 'appreciation');
+
+        $task = Task::where(['ref' => $task_ref])->first();
+        if ($task == null) {
+            return Controller::failedResponse('Could not locate the task');
+        }
+        $task->update(['appreciation' => $appreciation, 'rating' => $rating]);
+        $result = [
+            'result' => Task::parse_task($task),
+            'status_set' => true
+        ];
+        return Controller::successfulResponse($result);
+    }
 }

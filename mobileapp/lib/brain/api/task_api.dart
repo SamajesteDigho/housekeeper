@@ -32,4 +32,28 @@ class TaskAPI extends GetxService {
       }
     });
   }
+
+  static Future<TaskModel?> changeStatus({required String taskRef, required Map<String, dynamic> info}) {
+    String url = 'tasks/$taskRef/set_status';
+    return http.post(url, data: info).then((response) {
+      if (response['status_code'] == 200 || response['status_code'] == 201) {
+        var data = response['data'];
+        return TaskModel.fromJSON(data['result']);
+      } else {
+        return null;
+      }
+    });
+  }
+
+  static Future<TaskModel?> addAppreciation({required String taskRef, required Map<String, dynamic> info}) {
+    String url = 'tasks/$taskRef/appreciate';
+    return http.post(url, data: info).then((response) {
+      if (response['status_code'] == 200 || response['status_code'] == 201) {
+        var data = response['data'];
+        return TaskModel.fromJSON(data['result']);
+      } else {
+        return null;
+      }
+    });
+  }
 }

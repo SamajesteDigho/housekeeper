@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/data/models/keepers.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
+import 'package:housekeeper/brain/data/preferences/user_preferences.dart';
 import 'package:housekeeper/brain/helpers/dio.dart';
 
 class HouseKeeperAPI extends GetxService {
@@ -39,10 +40,7 @@ class HouseKeeperAPI extends GetxService {
 
   static Future<List<UserModel>> searchData({String? searchTerm, List<String>? filter}) {
     String url = 'keepers/keeper/search';
-    Map<String, dynamic> queryParams = {
-      'searchTerm': searchTerm,
-      'filter': filter
-    };
+    Map<String, dynamic> queryParams = {'searchTerm': searchTerm, 'filter': filter};
     return http.get(url, queryParams: queryParams).then((response) {
       List<UserModel> users = [];
       var data = response['data'];
@@ -53,6 +51,19 @@ class HouseKeeperAPI extends GetxService {
         }
       }
       return users;
+    });
+  }
+
+  static Future<UserModel?> startKeeperRequest({required String userRef, required Map<String, dynamic> info}) {
+    String url = 'keepers/$userRef/new';
+    return http.postForm(url, data: info).then((response) {
+      var data = response['data'];
+      if (response['status_code'] == 200) {
+        UserModel user = UserModel.fromJSON(data['result']);
+        UserPreference.to.saveProfile(profile: user);
+        return user;
+      }
+      return null;
     });
   }
 }

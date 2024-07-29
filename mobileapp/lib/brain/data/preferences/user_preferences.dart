@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
-import 'package:housekeeper/brain/data/models/address.dart';
-import 'package:housekeeper/brain/data/models/keepers.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
 import 'package:housekeeper/brain/data/preferences/storage_service.dart';
 import 'package:housekeeper/brain/routes/names.dart';
@@ -13,8 +11,6 @@ class UserPreference extends GetxController {
 
   final RxBool _isLogin = false.obs;
   final Rx<UserModel> _profile = UserModel().obs;
-  // final Rx<KeeperModel?> _keeper = null.obs;
-  // final Rx<AddressModel?> _address = null.obs;
   final RxString _deviceToken = ''.obs;
   final RxString _authToken = ''.obs;
 
@@ -38,8 +34,6 @@ class UserPreference extends GetxController {
     await StorageService.to.setString(key: AppStrings.prefUserAddressKey, value: jsonEncode(profile.address?.toJSON()));
     _isLogin.value = true;
     _profile.value = profile;
-    // _keeper.value = profile.keeper;
-    // _address.value = profile.address;
   }
 
   /// Saving user device token to local storage
@@ -60,8 +54,6 @@ class UserPreference extends GetxController {
       _isLogin.value = true;
       _profile.value = UserModel.fromJSON(jsonDecode(element));
     }
-    // _keeper.value = _profile.value.keeper;
-    // _address.value = _profile.value.address;
     _authToken.value = StorageService.to.getString(key: AppStrings.prefUserAuthTokenKey);
     _deviceToken.value = StorageService.to.getString(key: AppStrings.prefUserDeviceTokenKey);
   }
@@ -73,11 +65,9 @@ class UserPreference extends GetxController {
     await StorageService.to.remove(key: AppStrings.prefUserDeviceTokenKey);
     await StorageService.to.remove(key: AppStrings.prefUserDeviceTokenKey);
     _profile.value = UserModel();
-    // _keeper.value = null;
-    // _address.value = null;
     _deviceToken.value = '';
     _authToken.value = '';
     _isLogin.value = false;
-    Get.offAllNamed(AppRoutes.initial);
+    Get.toNamed(AppRoutes.initial);
   }
 }

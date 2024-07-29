@@ -72,6 +72,7 @@ class User extends Authenticatable
             return null;
         }
         $user->avatar = $user->avatar ?? 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . ($user->avatar ?? '/data/avatar/default_male.jpg');
+        $user->id_docs = $user->id_docs != null ? 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . '/' . $user->id_docs : null;
         $user->address = Address::where(['user_id' => $user->id])->first();
         return $user;
     }

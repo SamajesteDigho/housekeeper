@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/dimensions.dart';
 import 'package:housekeeper/brain/controllers/housekeeper/request_worker_controller.dart';
+import 'package:housekeeper/brain/helpers/utilities.dart';
 import 'package:housekeeper/brain/helpers/validators.dart';
 import 'package:housekeeper/pages/components/my_input_text_field.dart';
+import 'package:housekeeper/pages/components/rating_start.dart';
 import 'package:im_stepper/stepper.dart';
 
 class RequestWorkerPage extends StatefulWidget {
@@ -18,7 +20,14 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('IconStepper Example'),
+        title: Text(
+          'Worker Account Request'.toUpperCase(),
+          style: const TextStyle(
+            fontSize: AppDimension.largeText,
+            fontWeight: FontWeight.bold,
+            decoration: TextDecoration.underline,
+          ),
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -33,7 +42,7 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
                       Icon(Icons.person_outline, color: Colors.white),
                       Icon(Icons.account_circle_outlined, color: Colors.white),
                       Icon(Icons.document_scanner_outlined, color: Colors.white),
-                      Icon(Icons.verified, color: Colors.white),
+                      Icon(Icons.verified_user_outlined, color: Colors.white),
                     ],
 
                     activeStep: controller.currentPage.value,
@@ -53,11 +62,17 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             controller.currentPage.value == 0
-                                ? 'Basic Info'
+                                ? 'Basic Info'.toUpperCase()
                                 : controller.currentPage.value == 1
-                                    ? 'Origins and More'
-                                    : 'Identification Docs',
-                            style: const TextStyle(color: Colors.black, fontSize: 20),
+                                    ? 'Origins and Address'.toUpperCase()
+                                    : controller.currentPage.value == 2
+                                        ? 'Identification Docs'.toUpperCase()
+                                        : 'Validation'.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.5),
+                              fontSize: AppDimension.largeText,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -272,8 +287,380 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
                                           const Text('Here the description of the NB'),
                                         ],
                                       )
-                                    : const Center(
-                                        child: Text('Validation'),
+                                    : Obx(
+                                        () => Column(
+                                          children: [
+                                            Card(
+                                              shape: Border.all(style: BorderStyle.none),
+                                              child: Container(
+                                                width: AppDimension.appWidth,
+                                                margin: const EdgeInsets.all(AppDimension.defaultPadding / 2),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'User Information'.toUpperCase(),
+                                                      style: const TextStyle(
+                                                        color: Colors.blueAccent,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: AppDimension.mediumText,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        Container(
+                                                          width: 100,
+                                                          height: 100,
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.blue,
+                                                            borderRadius: BorderRadius.circular(60),
+                                                            border: Border.all(color: Colors.white, width: 1.5),
+                                                            image: DecorationImage(
+                                                              image: NetworkImage(
+                                                                  controller.validatedUser.value.avatar ?? ''),
+                                                              fit: BoxFit.fill,
+                                                            ),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors.grey.withOpacity(0.4),
+                                                                spreadRadius: 2,
+                                                                blurRadius: 2,
+                                                                offset: const Offset(-2, 2),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        const SizedBox(width: 10),
+                                                        Expanded(
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                '${controller.validatedUser.value.firstname?.toUpperCase()} ${controller.validatedUser.value.lastname}',
+                                                                style: const TextStyle(
+                                                                  fontWeight: FontWeight.bold,
+                                                                  fontStyle: FontStyle.normal,
+                                                                  fontSize: AppDimension.mediumText,
+                                                                ),
+                                                              ),
+                                                              Text(
+                                                                '${controller.validatedUser.value.username}',
+                                                                style: const TextStyle(
+                                                                  fontWeight: FontWeight.bold,
+                                                                  fontStyle: FontStyle.normal,
+                                                                  fontSize: AppDimension.mediumText,
+                                                                ),
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    '${MyUtilities.getAge(controller.validatedUser.value.birthdate)} years',
+                                                                    style: const TextStyle(
+                                                                      fontWeight: FontWeight.bold,
+                                                                      fontStyle: FontStyle.normal,
+                                                                      fontSize: AppDimension.mediumText,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SingleChildScrollView(
+                                                                scrollDirection: Axis.horizontal,
+                                                                child: Row(
+                                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                  children: [
+                                                                    Text(
+                                                                      controller.validatedUser.value.keeper
+                                                                              ?.nationality ??
+                                                                          '',
+                                                                      style: const TextStyle(
+                                                                        fontWeight: FontWeight.bold,
+                                                                        fontStyle: FontStyle.normal,
+                                                                        fontSize: AppDimension.mediumText,
+                                                                      ),
+                                                                    ),
+                                                                    const SizedBox(width: 10),
+                                                                    Text(
+                                                                      controller.validatedUser.value.keeper?.religion ??
+                                                                          '',
+                                                                      style: const TextStyle(
+                                                                        fontWeight: FontWeight.bold,
+                                                                        fontStyle: FontStyle.normal,
+                                                                        fontSize: AppDimension.mediumText,
+                                                                      ),
+                                                                    ),
+                                                                    const SizedBox(width: 10),
+                                                                    controller.validatedUser.value.keeper == null
+                                                                        ? const SizedBox()
+                                                                        : RatingStars(
+                                                                            rating: controller.validatedUser.value
+                                                                                    .keeper?.rating ??
+                                                                                0),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Card(
+                                              shape: Border.all(style: BorderStyle.none),
+                                              child: Container(
+                                                width: AppDimension.appWidth,
+                                                margin: const EdgeInsets.all(AppDimension.defaultPadding / 2),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Worker Information'.toUpperCase(),
+                                                      style: const TextStyle(
+                                                        color: Colors.blueAccent,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: AppDimension.mediumText,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Matricule : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.keeper?.matricule}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Nationality : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.keeper?.nationality}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Province : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.keeper?.province}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Religion : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.keeper?.religion}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Card(
+                                              shape: Border.all(style: BorderStyle.none),
+                                              child: Container(
+                                                width: AppDimension.appWidth,
+                                                margin: const EdgeInsets.all(AppDimension.defaultPadding / 2),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Address Information'.toUpperCase(),
+                                                      style: const TextStyle(
+                                                        color: Colors.blueAccent,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: AppDimension.mediumText,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Country : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.address?.country}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Province : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.address?.province}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'City : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.address?.city}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Postal Code : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.address?.postalCode}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Fax : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.address?.fax}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Full Address : ',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.normal,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '${controller.validatedUser.value.address?.fullAddress}'
+                                                              .toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: AppDimension.mediumText,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                       ),
                     ),
@@ -283,7 +670,7 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
                       vertical: AppDimension.defaultPadding,
                       horizontal: AppDimension.defaultPadding,
                     ),
-                    child: controller.currentPage.value > controller.maxSteps
+                    child: controller.currentPage.value == controller.maxSteps
                         ? ElevatedButton(
                             onPressed: () => Navigator.pop(context),
                             child: const Text('Close'),
@@ -291,13 +678,35 @@ class _RequestWorkerPage extends State<RequestWorkerPage> {
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ElevatedButton(
-                                onPressed: () => controller.back(),
-                                child: const Text('Prev'),
-                              ),
+                              controller.currentPage.value == 0
+                                  ? const SizedBox()
+                                  : ElevatedButton(
+                                      onPressed: () => controller.back(),
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(Colors.red.withOpacity(0.5)),
+                                      ),
+                                      child: const Text(
+                                        'Prev',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: AppDimension.smallText,
+                                        ),
+                                      ),
+                                    ),
                               ElevatedButton(
                                 onPressed: controller.next,
-                                child: Text(controller.currentPage.value == controller.maxSteps ? 'Save' : 'Continue'),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                                ),
+                                child: Text(
+                                  controller.currentPage.value == controller.maxSteps - 1 ? 'Save' : 'Continue',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: AppDimension.smallText,
+                                  ),
+                                ),
                               ),
                             ],
                           ),

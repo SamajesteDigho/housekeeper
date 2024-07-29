@@ -10,7 +10,7 @@ class AccountPageController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
 
-  UserModel user = UserPreference.to.profile;
+  Rx<UserModel> user = UserPreference.to.profile.obs;
 
   clickEditUser() {
     if (kDebugMode) {
@@ -19,7 +19,7 @@ class AccountPageController extends GetxController {
   }
 
   becomeHouseKeeper() {
-    Get.toNamed(AppRoutes.requestWorker);
+    Get.toNamed(AppRoutes.requestWorker)?.then((value) => user.value = UserPreference.to.profile);
   }
 
   houseKeeperDetails() {

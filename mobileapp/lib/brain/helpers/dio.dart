@@ -176,6 +176,30 @@ class HttpUtil {
     return response.data;
   }
 
+  // restful post form
+  Future postForm(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    if (kDebugMode) {
+      print("Requesting [POST] ${AppStrings.baseServerURL}$path");
+      print(data);
+    }
+    Options requestOptions = options ?? Options();
+    requestOptions.headers = requestOptions.headers ?? {};
+    var response = await dio.post(
+      path,
+      data: FormData.fromMap(data),
+      queryParameters: queryParameters,
+      options: requestOptions,
+      cancelToken: cancelToken,
+    );
+    print(response.data);
+    return response.data;
+  }
+
 //   Future put(
 //     String path, {
 //     dynamic data,
@@ -229,24 +253,6 @@ class HttpUtil {
 //     return response.data;
 //   }
 //
-//   /// restful post form
-//   Future postForm(
-//     String path, {
-//     dynamic data,
-//     Map<String, dynamic>? queryParameters,
-//     Options? options,
-//   }) async {
-//     Options requestOptions = options ?? Options();
-//     requestOptions.headers = requestOptions.headers ?? {};
-//     var response = await dio.post(
-//       path,
-//       data: FormData.fromMap(data),
-//       queryParameters: queryParameters,
-//       options: requestOptions,
-//       cancelToken: cancelToken,
-//     );
-//     return response.data;
-//   }
 //
 //   Future postStream(
 //     String path, {

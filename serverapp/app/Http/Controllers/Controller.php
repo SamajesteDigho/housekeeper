@@ -38,7 +38,7 @@ class Controller extends BaseController
         if (isset($file)) {
             $filename = $name . "." . $file->extension();
             $file->move(public_path($folder), $filename);
-            return $filename;
+            return $folder . $filename;
         }
         return null;
     }

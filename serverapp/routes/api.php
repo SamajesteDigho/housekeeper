@@ -75,7 +75,7 @@ Route::group(['prefix' => 'v1'], function () {
 
         Route::get('top/search', [HouseKeeperController::class, 'top_keepers'])->name('keepers.top_v1');
         Route::get('near/search', [HouseKeeperController::class, 'near_keepers'])->name('keepers.near_v1');
-        Route::get('keeper/search', [HouseKeeperController::class, 'search_keepers'])->name('keepers.keeper_v1');
+        Route::post('{user_ref}/new', [HouseKeeperController::class, 'new_keeper'])->name('keepers.new_keeper_v1');
     });
 
     Route::group(['prefix' => 'tasks'], function () {

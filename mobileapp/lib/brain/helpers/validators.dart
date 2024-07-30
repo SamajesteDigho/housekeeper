@@ -20,6 +20,16 @@ class InputValidator {
     return null;
   }
 
+  static String? confirmPasswordValidator(String? pass1, String? pass2) {
+    if(pass2 == null || pass2.isEmpty) {
+      return 'This field must not be empty';
+    }
+    else if(pass1?.compareTo(pass2) != 0) {
+      return 'Password and Confirm mut be equal';
+    }
+    return null;
+  }
+
   static String? phoneNumberValidator(String? phone) {
     if(phone == null || phone.isEmpty) {
       return 'This field must not be empty';

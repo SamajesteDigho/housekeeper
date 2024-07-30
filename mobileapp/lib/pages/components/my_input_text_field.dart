@@ -6,12 +6,14 @@ class MyInputTextField extends StatefulWidget {
   final String? hint;
   final String? text;
   final IconData? icon;
+  final IconData? suffixIcon;
   final bool? enabled;
   final int? maxNumberOfLine;
   final Function? setText;
   final Function? validator;
   final EdgeInsets? padding;
   final TextInputType? inputType;
+  final bool required;
   const MyInputTextField({
     super.key,
     required this.label,
@@ -24,6 +26,8 @@ class MyInputTextField extends StatefulWidget {
     this.validator,
     this.padding,
     this.inputType,
+    this.suffixIcon,
+    this.required = false,
   });
 
   @override
@@ -65,11 +69,23 @@ class _MyInputTextFieldState extends State<MyInputTextField> {
             borderSide: const BorderSide(color: Colors.redAccent, width: 2),
             borderRadius: BorderRadius.circular(4),
           ),
-          prefixIcon:
-              widget.icon == null ? null : Icon(widget.icon, color: Colors.black, size: AppDimension.mediumIcon),
+          prefixIcon: widget.icon == null
+              ? null
+              : Icon(
+                  widget.icon,
+                  color: Colors.black,
+                  size: AppDimension.mediumIcon,
+                ),
+          suffixIcon: widget.icon == null
+              ? null
+              : Icon(
+                  widget.suffixIcon,
+                  color: Colors.black,
+                  size: AppDimension.mediumIcon,
+                ),
           hintText: widget.hint,
           hintStyle: const TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
-          labelText: widget.label,
+          labelText: '${widget.label} ${widget.required == true ? ' *' : ''}',
           labelStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           filled: true,
           fillColor: Colors.white,

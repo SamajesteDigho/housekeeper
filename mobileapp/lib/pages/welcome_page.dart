@@ -23,12 +23,12 @@ class _WelcomePage extends State<WelcomePage> {
         width: AppDimension.appWidth,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topRight,
+            begin: Alignment.topLeft,
             end: Alignment.bottomLeft,
             colors: [
-              Colors.blue.withOpacity(0.5),
-              Colors.red,
-              Colors.orangeAccent,
+              Colors.blueAccent.withOpacity(0.4),
+              Colors.red.withOpacity(0.5),
+              Colors.orangeAccent.withOpacity(0.5),
             ],
           ),
         ),

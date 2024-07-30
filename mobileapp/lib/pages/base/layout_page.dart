@@ -8,17 +8,19 @@ class LayoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GetBuilder<LayoutController>(
-        init: LayoutController(layoutRepository: Get.find()),
-        builder: (controller) {
-          return SafeArea(
-            child: controller.pages[controller.activePage],
-          );
-        }
-      ),
-      bottomNavigationBar: const MyBottomNavigationBar(),
+    return GetBuilder<LayoutController>(
+      init: LayoutController(layoutRepository: Get.find()),
+      builder: (controller) {
+        return PopScope(
+          canPop: false,
+          child: Scaffold(
+            body: SafeArea(
+              child: controller.pages[controller.activePage],
+            ),
+            bottomNavigationBar: const MyBottomNavigationBar(),
+          ),
+        );
+      }
     );
   }
-
 }

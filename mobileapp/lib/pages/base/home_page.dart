@@ -93,6 +93,7 @@ class HeaderSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LayoutController>(
+      init: LayoutController(layoutRepository: Get.find()),
       builder: (controller) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -61,7 +61,7 @@ class UserModel {
         ref: json['ref'],
         firstname: json['firstname'],
         lastname: json['lastname'],
-        birthdate: DateTime.tryParse(json['birthdate']),
+        birthdate: DateTime.tryParse('${json['birthdate']}'),
         username: json['username'],
         email: json['email'],
         emailVerifiedAt: DateTime.tryParse(json['email_verified_at'] ?? ''),

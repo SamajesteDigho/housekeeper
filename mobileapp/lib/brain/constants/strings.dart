@@ -5,7 +5,7 @@ class AppStrings {
   static const String logoDark = 'assets/logo-dark.png';
   static const String idDocModel = 'assets/images/id_example.png';
 
-  static const String baseServerURL = 'http://192.168.1.101:8000/api/v1/';
+  static const String baseServerURL = 'http://192.168.1.102:8000/api/v1/';
 
   // =========================================================
   // Preference BASE STRINGS

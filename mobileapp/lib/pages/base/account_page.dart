@@ -53,7 +53,10 @@ class AccountPage extends StatelessWidget {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '${controller.user.value.firstname?.toUpperCase()} ${controller.user.value.lastname}',
+                                                controller.user.value.firstname != null &&
+                                                        controller.user.value.lastname != null
+                                                    ? '${controller.user.value.firstname?.toUpperCase() ?? ''} ${controller.user.value.lastname ?? ''}'
+                                                    : controller.user.value.username ?? '',
                                                 style: const TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold,

@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // LayoutRepository().storeFakeDate();
     return ChangeNotifierProvider(
       create: (context) => AppState(),
       child: GestureDetector(

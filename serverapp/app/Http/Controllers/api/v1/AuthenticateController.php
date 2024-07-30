@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
 use App\Models\Housekeeper;
 use App\Models\User;
 use Exception;
@@ -30,7 +29,7 @@ class AuthenticateController extends Controller
             } else {
                 return Controller::failedResponse('Invalid credentials !', 403);
             }
-            
+
             // Collect keeper info
             $keeper = Housekeeper::where(['user_id' => $user->id])->first();
             $user->keeper = Housekeeper::process_user_keeper($keeper, $user)->keeper;
@@ -44,27 +43,31 @@ class AuthenticateController extends Controller
         }
     }
 
-    public function register(RegisterRequest $request)
+    public function register(Request $request)
     {
-        $data = $request->validated();
-        $email = Arr::get($data, 'email');
-        $password = Arr::get($data, 'password');
+        $data = $request->all();
+        $firstname = Arr::get($data, "firstname");
+        $lastname = Arr::get($data, "lastname");
+        $username = Arr::get($data, "username");
+        $email = Arr::get($data, "email");
+        $phone = Arr::get($data, "phone");
+        $password = Arr::get($data, "password");
         $ref = Controller::userRefGen();
 
         $query = [
-            'ref' => $ref,
-            'firstname' => Arr::get($data, 'firstname', null),
-            'lastname' => Arr::get($data, 'lastname', null),
-            'username' => Arr::get($data, 'username', null) ?? User::generateUsername($ref),
             'email' => $email,
-            'phone' => Arr::get($data, 'phone', null),
-            'birthdate' => Arr::get($data, 'birthdate', null),
+            'ref' => $ref,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'username' => $username ?? User::generateUsername($ref),
+            'phone' => $phone,
             'password' => bcrypt($password),
         ];
+
         User::create($query);
         Auth::attempt(['email' => $email, 'password' => $password]);
         $result = [
-            'result' => Auth::user(),
+            'result' => User::parse_user(Auth::user()),
             'token' => Auth::user()->createToken('userToken')->plainTextToken,
         ];
         return Controller::successfulResponse($result, 201);

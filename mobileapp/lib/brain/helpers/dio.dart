@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart' as get_x;
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
@@ -43,6 +44,7 @@ class HttpUtil {
       }, onResponse: (Response response, ResponseInterceptorHandler handler) {
         return handler.next(response);
       }, onError: (DioException e, handler) {
+        EasyLoading.show();
         ErrorEntity eInfo = createErrorEntity(e);
         if (kDebugMode) {
           print(e);
@@ -154,6 +156,7 @@ class HttpUtil {
       options: options,
       cancelToken: cancelToken,
     );
+    EasyLoading.dismiss();
     print(response.data);
     return response.data;
   }
@@ -172,6 +175,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
+    EasyLoading.dismiss();
     print(response.data);
     return response.data;
   }
@@ -196,6 +200,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
+    EasyLoading.dismiss();
     print(response.data);
     return response.data;
   }

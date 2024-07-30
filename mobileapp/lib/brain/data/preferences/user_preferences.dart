@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/constants/strings.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
@@ -60,6 +61,7 @@ class UserPreference extends GetxController {
 
   /// On User Logout, Clear the User Profile
   Future<void> logoutProfile() async {
+    EasyLoading.show();
     await StorageService.to.remove(key: AppStrings.prefUserProfileKey);
     await StorageService.to.remove(key: AppStrings.prefKeeperProfileKey);
     await StorageService.to.remove(key: AppStrings.prefUserDeviceTokenKey);
@@ -68,6 +70,7 @@ class UserPreference extends GetxController {
     _deviceToken.value = '';
     _authToken.value = '';
     _isLogin.value = false;
-    Get.toNamed(AppRoutes.initial);
+    Get.toNamed(AppRoutes.login);
+    EasyLoading.dismiss();
   }
 }

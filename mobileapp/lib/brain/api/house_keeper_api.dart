@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/data/models/keepers.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
@@ -41,6 +42,7 @@ class HouseKeeperAPI extends GetxService {
   static Future<List<UserModel>> searchData({String? searchTerm, List<String>? filter}) {
     String url = 'keepers/keeper/search';
     Map<String, dynamic> queryParams = {'searchTerm': searchTerm, 'filter': filter};
+    EasyLoading.show();
     return http.get(url, queryParams: queryParams).then((response) {
       List<UserModel> users = [];
       var data = response['data'];
@@ -56,6 +58,7 @@ class HouseKeeperAPI extends GetxService {
 
   static Future<UserModel?> startKeeperRequest({required String userRef, required Map<String, dynamic> info}) {
     String url = 'keepers/$userRef/new';
+    EasyLoading.show();
     return http.postForm(url, data: info).then((response) {
       var data = response['data'];
       if (response['status_code'] == 200) {

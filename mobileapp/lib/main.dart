@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/helpers/dependencies.dart';
 import 'package:housekeeper/brain/routes/names.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: AppRoutes.initial,
           getPages: AppPages.pages,
+          builder: EasyLoading.init(),
         ),
       ),
     );

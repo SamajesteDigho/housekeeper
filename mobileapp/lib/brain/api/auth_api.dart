@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:housekeeper/brain/data/models/user.dart';
 import 'package:housekeeper/brain/data/preferences/user_preferences.dart';
@@ -10,6 +11,7 @@ class AuthAPI extends GetxService {
   static Future<dynamic> login(String pseudo, String password) async {
     String url = 'auth/login';
     Map<String, dynamic> data = {'pseudo': pseudo, 'password': password};
+    EasyLoading.show();
     var response = await http.post(url, data: data);
     if (response['status_code'] == 200) {
       Map<String, dynamic> result = response['data'];
@@ -25,6 +27,7 @@ class AuthAPI extends GetxService {
 
   static Future<dynamic> register({required Map<String, dynamic> info}) async {
     String url = 'auth/register';
+    EasyLoading.show();
     var response = await http.post(url, data: info);
     if (response['status_code'] == 200 || response['status_code'] == 201) {
       Map<String, dynamic> result = response['data'];

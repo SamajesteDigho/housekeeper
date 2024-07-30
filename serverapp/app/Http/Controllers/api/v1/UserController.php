@@ -93,7 +93,7 @@ class UserController extends Controller
 
     public function delete_fully(Request $request, $id)
     {
-        $user = User::find($id)->first();
+        $user = User::find($id);
         if ($user == null) {
             return Controller::failedResponse('User was not found');
         }

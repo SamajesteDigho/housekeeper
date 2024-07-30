@@ -91,6 +91,20 @@ class UserController extends Controller
         return Controller::successfulResponse($result, 200);
     }
 
+    public function delete_fully(Request $request, $id)
+    {
+        $user = User::find($id)->first();
+        if ($user == null) {
+            return Controller::failedResponse('User was not found');
+        }
+        $user->delete();
+        $result = [
+            'result' => $user->id,
+            'message' => 'Deleted successfully'
+        ];
+        return Controller::successfulResponse($result, 200);
+    }
+
     public function search(Request $request, string $term)
     {
         $data = $request->all();

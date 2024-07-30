@@ -53,6 +53,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('{ref}', [UserController::class, 'read'])->name('user.read_v1');
         Route::post('{ref}', [UserController::class, 'update'])->name('user.update_v1');
         Route::delete('{ref}', [UserController::class, 'delete'])->name('user.delete_v1');
+        Route::delete('{id}/delete', [UserController::class, 'delete_fully'])->name('user.delete_v1');
         
         Route::post('{ref}/id_doc', [UserController::class, 'load_identificationFile'])->name('user.load_identFile_v1');
         Route::get('search/{term}', [UserController::class, 'search'])->name('user.search_v1');

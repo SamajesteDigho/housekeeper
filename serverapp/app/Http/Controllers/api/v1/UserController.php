@@ -81,6 +81,9 @@ class UserController extends Controller
     public function delete(Request $request, string $ref)
     {
         $user = User::where(['ref' => $ref])->first();
+        if ($user == null) {
+            return Controller::failedResponse('User was not found');
+        }
         $user->status = 'DELETED';
         $user->save();
 

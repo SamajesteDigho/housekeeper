@@ -73,6 +73,9 @@ class User extends Authenticatable
         $user->id_docs = $user->id_docs != null ? 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . '/' . $user->id_docs : null;
         $user->address = Address::where(['user_id' => $user->id])->first();
         $user->keeper = Housekeeper::where(['user_id' => $user->id])->first();
+        if($user->keeper != null) {
+            $user->keeper->verified = boolval($user->keeper->verified);
+        }
         return $user;
     }
 

@@ -46,7 +46,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('register', [AuthenticateController::class, 'register'])->name('register_v1');
     });
 
-    Route::group(['prefix' => 'users', 'middleware' => ['auth:sanctum']], function () {
+    Route::group(['prefix' => 'users'], function () {
         Route::get('', [UserController::class, 'get'])->name('user.get_v1');
         Route::post('', [UserController::class, 'create'])->name('user.create_v1');
         Route::get('{ref}', [UserController::class, 'read'])->name('user.read_v1');
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('search/{term}', [UserController::class, 'search'])->name('user.search_v1');
     });
 
-    Route::group(['prefix' => 'addresses', 'middleware' => ['auth:sanctum']], function () {
+    Route::group(['prefix' => 'addresses'], function () {
         Route::get('', [AddressController::class, 'get'])->name('address.get_v1');
         Route::post('', [AddressController::class, 'create'])->name('address.create_v1');
         Route::get('{id}', [AddressController::class, 'read'])->name('address.read_v1');
@@ -79,7 +79,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('{user_ref}/new', [HouseKeeperController::class, 'new_keeper'])->name('keepers.new_keeper_v1');
     });
 
-    Route::group(['prefix' => 'tasks', 'middleware' => ['auth:sanctum']], function () {
+    Route::group(['prefix' => 'tasks'], function () {
         Route::get('', [TaskController::class, 'get'])->name('tasks.get_v1');
         Route::post('', [TaskController::class, 'create'])->name('tasks.create_v1');
         Route::get('{id}', [TaskController::class, 'read'])->name('tasks.read_v1');

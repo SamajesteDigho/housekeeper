@@ -269,7 +269,7 @@ class HouseKeeperController extends Controller
                 'fax' => $fax ?? $address->fax
             ]);
         }
-        $user = Housekeeper::process_user_keeper($housekeeper, $user);
+        
         $result = [
             'result' => User::parse_user($user),
             'message' => 'HouseKeeper demande processed'
